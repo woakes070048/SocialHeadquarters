@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Michal Kostewicz on 05.03.16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { WebConfig.class})
+@ContextConfiguration(classes = {WebConfig.class})
 @WebAppConfiguration
 public class UserServiceTest {
 

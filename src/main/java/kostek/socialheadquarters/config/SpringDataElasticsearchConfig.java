@@ -1,6 +1,12 @@
 package kostek.socialheadquarters.config;
 
 import org.elasticsearch.client.node.NodeClient;
+import org.elasticsearch.cluster.ClusterName;
+import org.elasticsearch.cluster.metadata.IndexMetaData;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.util.concurrent.EsExecutors;
+import org.elasticsearch.node.Node;
+import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,12 +21,8 @@ import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
  * Created by Michal Kostewicz on 06.03.16.
  */
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "kostek.socialheadquarters")
+@EnableElasticsearchRepositories(basePackages = "kostek.socialheadquarters.repositories")
 public class SpringDataElasticsearchConfig {
-
-    @Autowired
-    private ElasticsearchTemplate template;
-
 
     @Bean
     public ElasticsearchTemplate elasticsearchTemplate() {
@@ -28,8 +30,16 @@ public class SpringDataElasticsearchConfig {
     }
 
     private static NodeClient getNodeClient() {
-        return (NodeClient) nodeBuilder().clusterName(UUID.randomUUID().toString()).local(true).node()
-                .client();
+       Node node = NodeBuilder.nodeBuilder().data(true).settings(
+                Settings.builder()
+                        .put(ClusterName.SETTING, "test")
+                        .put(IndexMetaData.SETTING_NUMBER_OF_SHARDS, 1)
+                        .put(IndexMetaData.SETTING_NUMBER_OF_REPLICAS, 0)
+                        .put(EsExecutors.PROCESSORS, 1)
+                        .put("index.store.type", "memory")
+                        .put("path.home", "/home/kostek/elasticsearch/")
+        ).build();
+        return (NodeClient) node.client();
 
     }
 

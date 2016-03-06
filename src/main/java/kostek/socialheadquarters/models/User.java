@@ -1,10 +1,14 @@
 package kostek.socialheadquarters.models;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 /**
  * Created by Michal Kostewicz on 02.03.16.
  */
+@Document( indexName = "user" , type = "appuser")
 public class User {
-
+    @Id
     private Long id;
 
     private String username;
