@@ -13,6 +13,7 @@ import java.util.List;
 public interface UserRepository extends ElasticsearchRepository<User,Long> {
     //Spring Data provide most CRUD methods for us and rest of them are made taking method name
 
-    List<User> findByUsername(String username);
+    User findByUsername(String username);
 
+    User findById(Long id);
 }

@@ -3,6 +3,7 @@ package kostek.socialheadquarters.services;
 import kostek.socialheadquarters.models.User;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by kostek on 02.03.16.
@@ -18,7 +19,7 @@ public interface UserService {
 
     void deleteUserById(Long id);
 
-    List<User> findAllUsers();
+    Set<User> findAllUsers();
 
     void deleteAllUsers();
 

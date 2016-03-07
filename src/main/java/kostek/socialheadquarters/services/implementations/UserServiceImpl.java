@@ -12,10 +12,9 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.jws.soap.SOAPBinding;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
@@ -36,32 +35,24 @@ public class UserServiceImpl implements UserService {
 
     public List<User> users = new ArrayList<>();
 
-    public List<User> findAllUsers() {
-        return users;
+    public Set<User> findAllUsers() {
+        Set<User> userSet = new HashSet<User>();
+        for (User user : userRepository.findAll()) {
+            userSet.add(user);
+        }
+        return userSet;
     }
 
     public User findById(Long id) {
-        for(User user : users){
-            if(user.getId() == id){
-                return user;
-            }
-        }
-        return null;
+        return userRepository.findById(id);
     }
 
     public User findByName(String name) {
-        return userRepository.findByUsername(name).get(0);
-        /*for(User user : users){
-            if(user.getUsername().equalsIgnoreCase(name)){
-                return user;
-            }
-        }
-        return null;*/
+        return userRepository.findByUsername(name);
     }
 
     public void saveUser(User user) {
         userRepository.save(user);
-        //users.add(user);
     }
 
     public void updateUser(User user) {
@@ -70,12 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void deleteUserById(Long id) {
-        for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
-            User user = iterator.next();
-            if (user.getId() == id) {
-                iterator.remove();
-            }
-        }
+        userRepository.delete(id);
     }
 
     public boolean isUserExist(User user) {

@@ -1,5 +1,6 @@
 package kostek.socialheadquarters.services;
 
+import kostek.socialheadquarters.config.SpringDataElasticsearchConfigForTest;
 import kostek.socialheadquarters.config.WebConfig;
 import org.junit.Assert;
 import kostek.socialheadquarters.models.User;
@@ -12,12 +13,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Michal Kostewicz on 05.03.16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {WebConfig.class})
+@ContextConfiguration(classes = {WebConfig.class, SpringDataElasticsearchConfigForTest.class})
 @WebAppConfiguration
 public class UserServiceTest {
 
@@ -34,7 +36,7 @@ public class UserServiceTest {
 
     @Test
     public void findAllUsersTest() {
-        List<User> usersFounded = userService.findAllUsers();
+        Set<User> usersFounded = userService.findAllUsers();
         Assert.assertNotNull(usersFounded);
         Assert.assertEquals(3 , usersFounded.size());
     }
@@ -97,12 +99,12 @@ public class UserServiceTest {
 
     @Test
     public void deleteAllUsers() {
-        List<User> usersList = userService.findAllUsers();
+        Set<User> usersList = userService.findAllUsers();
         Assert.assertNotNull(usersList);
         Assert.assertEquals(3 , usersList.size());
 
         userService.deleteAllUsers();
-        List<User> usersListAfterClearing = userService.findAllUsers();
+        Set<User> usersListAfterClearing = userService.findAllUsers();
         Assert.assertEquals(0 , usersList.size());
 
     }

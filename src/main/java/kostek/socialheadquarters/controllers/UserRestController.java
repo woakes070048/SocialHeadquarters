@@ -1,6 +1,7 @@
 package kostek.socialheadquarters.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import kostek.socialheadquarters.models.User;
 import kostek.socialheadquarters.services.UserService;
@@ -25,12 +26,12 @@ public class UserRestController {
     UserService userService;
 
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> listAllUsers() {
-        List<User> users = userService.findAllUsers();
+    public ResponseEntity<Set<User>> listAllUsers() {
+        Set<User> users = userService.findAllUsers();
         if (users.isEmpty()) {
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<Set<User>>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<Set<User>>(users, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
