@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by kostek on 02.03.16.
  */
 public interface UserService {
-    User findById(String id);
+    User findById(Long id);
 
     List<User> findByName(String name);
 
@@ -17,7 +17,7 @@ public interface UserService {
 
     void updateUser(User user);
 
-    void deleteUserById(String id);
+    void deleteUserById(Long id);
 
     Set<User> findAllUsers();
 
@@ -25,6 +25,6 @@ public interface UserService {
 
     void deleteAll();
 
-    String findMaxId();
+    Long findMaxId();
 
 }

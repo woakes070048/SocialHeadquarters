@@ -2,11 +2,8 @@ package kostek.socialheadquarters.services;
 
 import kostek.socialheadquarters.config.SpringDataElasticsearchConfigForTest;
 import kostek.socialheadquarters.config.WebConfig;
-import org.junit.After;
-import org.junit.Assert;
+import org.junit.*;
 import kostek.socialheadquarters.models.User;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,9 +27,9 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        userService.saveUser(new User("1", "Sam", "NY", "sam@abc.com"));
-        userService.saveUser(new User("2", "Tommy", "ALBAMA", "tomy@abc.com"));
-        userService.saveUser(new User("3", "Kelly", "NEBRASKA", "kelly@abc.com"));
+        userService.saveUser(new User(1L, "Sam", "NY", "sam@abc.com"));
+        userService.saveUser(new User(2L, "Tommy", "ALBAMA", "tomy@abc.com"));
+        userService.saveUser(new User(3L, "Kelly", "NEBRASKA", "kelly@abc.com"));
     }
 
     @After
@@ -49,9 +46,9 @@ public class UserServiceTest {
 
     @Test
     public void findByIdTest() {
-        User userFounded = userService.findById("3");
+        User userFounded = userService.findById(3L);
         Assert.assertNotNull(userFounded);
-        Assert.assertEquals("3" , userFounded.getId());
+        Assert.assertEquals(Long.valueOf(3) , userFounded.getId());
     }
 
     @Test
@@ -63,7 +60,7 @@ public class UserServiceTest {
 
     @Test
     public void saveUserTest() {
-        User newUser = new User("4", "Johny", "BRAVO", "johnny@abc.com");
+        User newUser = new User(4L, "Johny", "BRAVO", "johnny@abc.com");
         userService.saveUser(newUser);
 
         User userFounded = userService.findByName("Johny").get(0);
@@ -73,7 +70,7 @@ public class UserServiceTest {
 
     @Test
     public void updateUserTest() {
-        User userForUpdate = userService.findById("3");
+        User userForUpdate = userService.findById(3L);
         userForUpdate.setName("Richard");
         userService.updateUser(userForUpdate);
 
@@ -86,22 +83,26 @@ public class UserServiceTest {
 
     @Test
     public void deleteUserByIdTest() {
-        User userForDelete = userService.findById("3");
+        User userForDelete = userService.findById(3L);
         Assert.assertNotNull(userForDelete);
 
-        userService.deleteUserById("3");
-        User userDeleted = userService.findById("3");
+        userService.deleteUserById(3L);
+        User userDeleted = userService.findById(3L);
         Assert.assertNull(userDeleted);
     }
 
     @Test
     public void isUserExistTest() {
-        User existingUser = userService.findById("1");
+        User existingUser = userService.findById(1L);
         Assert.assertNotNull(existingUser);
 
         boolean userExist = userService.isUserExist(existingUser);
         Assert.assertEquals(true , userExist);
     }
 
-
+    @Test
+    public void findMaxIdTest(){
+        Long maxId = userService.findMaxId();
+        Assert.assertEquals(Long.valueOf(3), maxId);
+    }
 }

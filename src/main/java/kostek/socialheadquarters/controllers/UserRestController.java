@@ -34,7 +34,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUser(@PathVariable("id") String id) {
+    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
         System.out.println("Fetching User with id " + id);
         User user = userService.findById(id);
         if (user == null) {
@@ -61,7 +61,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@PathVariable("id") String id, @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         System.out.println("Updating User " + id);
 
         User currentUser = userService.findById(id);
@@ -80,7 +80,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<User> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<User> deleteUser(@PathVariable("id") Long id) {
         System.out.println("Fetching & Deleting User with id " + id);
 
         User user = userService.findById(id);

@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     @Id
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -24,18 +24,18 @@ public class User implements Serializable{
 
     }
 
-    public User(String id, String name, String address, String email) {
+    public User(Long id, String name, String address, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.email = email;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
