@@ -3,21 +3,14 @@ package kostek.socialheadquarters.services.implementations;
 import kostek.socialheadquarters.models.User;
 import kostek.socialheadquarters.repositories.UserRepository;
 import kostek.socialheadquarters.services.UserService;
-import org.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;
-import org.apache.lucene.search.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.jws.soap.SOAPBinding;
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 
 /**
  * Created by kostek on 02.03.16.
@@ -35,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
     public List<User> users = new ArrayList<>();
 
+    @Override
     public Set<User> findAllUsers() {
         Set<User> userSet = new HashSet<User>();
         for (User user : userRepository.findAll()) {
@@ -43,33 +37,44 @@ public class UserServiceImpl implements UserService {
         return userSet;
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id);
+    @Override
+    public User findById(String id) {
+        return userRepository.findOne(id);
     }
 
-    public User findByName(String name) {
-        return userRepository.findByUsername(name);
+    @Override
+    public List<User> findByName(String name) {
+        return userRepository.findByName(name);
     }
 
+    @Override
     public void saveUser(User user) {
         userRepository.save(user);
     }
 
+    @Override
     public void updateUser(User user) {
-        int index = users.indexOf(user);
-        users.set(index, user);
+        userRepository.save(user);
     }
 
-    public void deleteUserById(Long id) {
+    @Override
+    public void deleteUserById(String id) {
         userRepository.delete(id);
+
     }
 
+    @Override
     public boolean isUserExist(User user) {
-        return findByName(user.getUsername())!=null;
+        return !findByName(user.getName()).isEmpty();
     }
 
-    public void deleteAllUsers(){
-        users.clear();
+    @Override
+    public void deleteAll() {
+        userRepository.deleteAll();
     }
 
+    @Override
+    public String findMaxId() {
+        return userRepository.findTopByOrderByIdDesc();
+    }
 }

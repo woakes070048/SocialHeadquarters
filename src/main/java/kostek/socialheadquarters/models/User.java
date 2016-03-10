@@ -3,45 +3,48 @@ package kostek.socialheadquarters.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.io.Serializable;
+
 /**
  * Created by Michal Kostewicz on 02.03.16.
  */
 @Document( indexName = "user" , type = "appuser")
-public class User {
-    @Id
-    private Long id;
+public class User implements Serializable{
 
-    private String username;
+    @Id
+    private String id;
+
+    private String name;
 
     private String address;
 
     private String email;
 
     public User() {
-        id = 0L;
+
     }
 
-    public User(long id, String username, String address, String email) {
+    public User(String id, String name, String address, String email) {
         this.id = id;
-        this.username = username;
+        this.name = name;
         this.address = address;
         this.email = email;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
@@ -61,30 +64,31 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (address != null ? !address.equals(user.address) : user.address != null) return false;
+        return email != null ? email.equals(user.email) : user.email == null;
+
+    }
+
+    @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof User))
-            return false;
-        User other = (User) obj;
-        if (id != other.id)
-            return false;
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", address=" + address
+        return "User [id=" + id + ", name=" + name + ", address=" + address
                 + ", email=" + email + "]";
     }
 

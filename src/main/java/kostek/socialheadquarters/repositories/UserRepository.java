@@ -10,10 +10,12 @@ import java.util.List;
  * Created by Michal Kostewicz on 06.03.16.
  */
 @Repository("userRepository")
-public interface UserRepository extends ElasticsearchRepository<User,Long> {
+public interface UserRepository extends ElasticsearchRepository<User,String> {
     //Spring Data provide most CRUD methods for us and rest of them are made taking method name
 
-    User findByUsername(String username);
+    List<User> findByName(String name);
 
-    User findById(Long id);
+    List<User> findById(String id);
+
+    String findTopByOrderByIdDesc();
 }

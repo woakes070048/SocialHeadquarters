@@ -1,6 +1,5 @@
 package kostek.socialheadquarters.controllers;
 
-import java.util.List;
 import java.util.Set;
 
 import kostek.socialheadquarters.models.User;
@@ -35,7 +34,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
+    public ResponseEntity<User> getUser(@PathVariable("id") String id) {
         System.out.println("Fetching User with id " + id);
         User user = userService.findById(id);
         if (user == null) {
@@ -47,10 +46,10 @@ public class UserRestController {
 
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
     public ResponseEntity<Void> saveUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating User " + user.getUsername());
+        System.out.println("Creating User " + user.getName());
 
         if (userService.isUserExist(user)) {
-            System.out.println("A User with name " + user.getUsername() + " already exist");
+            System.out.println("A User with name " + user.getName() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
 
@@ -62,7 +61,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable("id") String id, @RequestBody User user) {
         System.out.println("Updating User " + id);
 
         User currentUser = userService.findById(id);
@@ -72,7 +71,7 @@ public class UserRestController {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
 
-        currentUser.setUsername(user.getUsername());
+        currentUser.setName(user.getName());
         currentUser.setAddress(user.getAddress());
         currentUser.setEmail(user.getEmail());
 
@@ -81,7 +80,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
+    public ResponseEntity<User> deleteUser(@PathVariable("id") String id) {
         System.out.println("Fetching & Deleting User with id " + id);
 
         User user = userService.findById(id);
@@ -91,14 +90,6 @@ public class UserRestController {
         }
 
         userService.deleteUserById(id);
-        return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
-    }
-
-    @RequestMapping(value = "/user/", method = RequestMethod.DELETE)
-    public ResponseEntity<User> deleteAllUsers() {
-        System.out.println("Deleting All Users");
-
-        userService.deleteAllUsers();
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
 

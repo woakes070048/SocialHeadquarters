@@ -9,20 +9,22 @@ import java.util.Set;
  * Created by kostek on 02.03.16.
  */
 public interface UserService {
-    User findById(Long id);
+    User findById(String id);
 
-    User findByName(String name);
+    List<User> findByName(String name);
 
     void saveUser(User user);
 
     void updateUser(User user);
 
-    void deleteUserById(Long id);
+    void deleteUserById(String id);
 
     Set<User> findAllUsers();
 
-    void deleteAllUsers();
-
     boolean isUserExist(User user);
+
+    void deleteAll();
+
+    String findMaxId();
 
 }
