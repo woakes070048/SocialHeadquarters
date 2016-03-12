@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by kostek on 02.03.16.
  */
-public interface UserService {
+public interface UserService extends BasicAppService<User> {
     User findById(Long id);
 
     List<User> findByName(String name);
@@ -22,9 +22,5 @@ public interface UserService {
     Set<User> findAllUsers();
 
     boolean isUserExist(User user);
-
-    void deleteAll();
-
-    Long findMaxId();
 
 }

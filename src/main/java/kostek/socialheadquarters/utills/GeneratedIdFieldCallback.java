@@ -14,6 +14,5 @@ public class GeneratedIdFieldCallback implements ReflectionUtils.FieldCallback {
 
     @Override
     public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
-
     }
 }

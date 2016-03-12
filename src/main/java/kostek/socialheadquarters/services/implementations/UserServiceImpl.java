@@ -2,10 +2,12 @@ package kostek.socialheadquarters.services.implementations;
 
 import kostek.socialheadquarters.models.User;
 import kostek.socialheadquarters.repositories.UserRepository;
+import kostek.socialheadquarters.services.AbstractBasicAppService;
 import kostek.socialheadquarters.services.UserService;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.metrics.max.Max;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.ResultsExtractor;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -16,7 +18,6 @@ import org.elasticsearch.action.search.SearchResponse;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 import static org.elasticsearch.action.search.SearchType.QUERY_AND_FETCH;
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
@@ -27,13 +28,13 @@ import static org.elasticsearch.search.aggregations.AggregationBuilders.max;
  */
 @Service("userService")
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractBasicAppService implements UserService {
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
 
     @Resource
     UserRepository userRepository;
-    
+
     @Override
     public Set<User> findAllUsers() {
         Set<User> userSet = new HashSet<User>();
@@ -80,22 +81,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long findMaxId() {
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(matchAllQuery())
-                .withSearchType(QUERY_AND_FETCH)
-                .withIndices("user").withTypes("appuser")
-                .addAggregation(max("max_id").field("id"))
-                .build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Aggregations>() {
-            @Override
-            public Aggregations extract(SearchResponse response) {
-                return response.getAggregations();
-            }
-        });
-        Max max = aggregations.get("max_id");
-        Long maxValue = (long)max.getValue();
-        return maxValue;
+    public Class<User> getServiceDependentClass() {
+        return User.class;
     }
 
 }

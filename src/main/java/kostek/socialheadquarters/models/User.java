@@ -1,6 +1,5 @@
 package kostek.socialheadquarters.models;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldIndex;
@@ -12,10 +11,7 @@ import java.io.Serializable;
  * Created by Michal Kostewicz on 02.03.16.
  */
 @Document( indexName = "user" , type = "appuser")
-public class User implements Serializable{
-
-    @Id
-    private Long id;
+public class User extends AbstractBasicAppEntity implements Serializable{
 
     @Field(
             type = FieldType.String,
@@ -37,14 +33,6 @@ public class User implements Serializable{
         this.name = name;
         this.address = address;
         this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
