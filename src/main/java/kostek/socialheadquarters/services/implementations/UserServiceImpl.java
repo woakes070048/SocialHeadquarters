@@ -3,8 +3,8 @@ package kostek.socialheadquarters.services.implementations;
 import kostek.socialheadquarters.models.User;
 import kostek.socialheadquarters.repositories.UserRepository;
 import kostek.socialheadquarters.services.UserService;
-import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.metrics.max.Max;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.ResultsExtractor;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 import org.elasticsearch.action.search.SearchResponse;
 
 import javax.annotation.Resource;
-import javax.naming.directory.SearchResult;
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static org.elasticsearch.action.search.SearchType.COUNT;
+import static org.elasticsearch.action.search.SearchType.QUERY_AND_FETCH;
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+import static org.elasticsearch.search.aggregations.AggregationBuilders.max;
 
 /**
  * Created by kostek on 02.03.16.
@@ -33,9 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     UserRepository userRepository;
-
-    public final AtomicLong counter = new AtomicLong();
-
+    
     @Override
     public Set<User> findAllUsers() {
         Set<User> userSet = new HashSet<User>();
@@ -83,28 +81,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long findMaxId() {
-        // given
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(matchAllQuery())
-                .withSearchType(COUNT)
+                .withSearchType(QUERY_AND_FETCH)
                 .withIndices("user").withTypes("appuser")
+                .addAggregation(max("max_id").field("id"))
                 .build();
-        Long result = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Long>() {
-
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Aggregations>() {
             @Override
-            public Long extract(SearchResponse response) {
-                long totalHits = response.getHits()
-                        .totalHits();
-                List<String> ids = new ArrayList<String>();
-                for (SearchHit hit : response.getHits()) {
-                    if (hit != null) {
-                        ids.add(hit.getId());
-                    }
-                }
-                return totalHits;
+            public Aggregations extract(SearchResponse response) {
+                return response.getAggregations();
             }
         });
-        System.out.println(result);
-        return result;
+        Max max = aggregations.get("max_id");
+        Long maxValue = (long)max.getValue();
+        return maxValue;
     }
+
 }

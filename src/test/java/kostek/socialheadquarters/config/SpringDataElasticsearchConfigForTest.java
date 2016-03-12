@@ -1,9 +1,9 @@
 package kostek.socialheadquarters.config;
 
+import kostek.socialheadquarters.models.User;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.cluster.ClusterName;
 import org.elasticsearch.cluster.metadata.IndexMetaData;
-import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.util.concurrent.EsExecutors;
 import org.springframework.context.annotation.Bean;
@@ -25,11 +25,15 @@ public class SpringDataElasticsearchConfigForTest {
 
     @Bean
     public ElasticsearchTemplate elasticsearchTemplate() {
-        return new ElasticsearchTemplate(getNodeClient());
+        ElasticsearchTemplate elasticsearchTemplate = new ElasticsearchTemplate(getNodeClient());
+        elasticsearchTemplate.deleteIndex(User.class);
+        elasticsearchTemplate.createIndex(User.class);
+        elasticsearchTemplate.putMapping(User.class);
+        return elasticsearchTemplate;
     }
 
     private static Client getNodeClient() {
-        Settings settings = ImmutableSettings.settingsBuilder()
+        Settings settings = Settings.settingsBuilder()
                 .put(ClusterName.SETTING, "Test")
                 .put(IndexMetaData.SETTING_NUMBER_OF_SHARDS, 1)
                 .put(IndexMetaData.SETTING_NUMBER_OF_REPLICAS, 0)
