@@ -1,13 +1,13 @@
 package kostek.socialheadquarters.config;
 
-import kostek.socialheadquarters.models.User;
-import org.elasticsearch.client.Client;
-import org.elasticsearch.cluster.ClusterName;
-import org.elasticsearch.cluster.metadata.IndexMetaData;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.util.concurrent.EsExecutors;
+import kostek.socialheadquarters.config.annotations.SkipAtTests;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
@@ -20,27 +20,23 @@ import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
  */
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "kostek.socialheadquarters.repositories")
+@ComponentScan(basePackages = "kostek.socialheadquarters",
+        excludeFilters = @ComponentScan.Filter(type= FilterType.ANNOTATION, classes = SkipAtTests.class))
 public class SpringDataElasticsearchConfigForTest {
-    private Path dataDirectory;
+    @Autowired
+    ElasticsearchClientFactory elasticsearchClientFactory;
 
     @Bean
-    public ElasticsearchTemplate elasticsearchTemplate() {
-        ElasticsearchTemplate elasticsearchTemplate = new ElasticsearchTemplate(getNodeClient());
-        elasticsearchTemplate.deleteIndex(User.class);
-        elasticsearchTemplate.createIndex(User.class);
-        elasticsearchTemplate.putMapping(User.class);
-        return elasticsearchTemplate;
+    public ElasticsearchOperations elasticsearchTemplate() {
+            elasticsearchClientFactory.createClient();
+        return new ElasticsearchTemplate(elasticsearchClientFactory.getClient());
     }
 
-    private static Client getNodeClient() {
-        Settings settings = Settings.settingsBuilder()
-                .put(ClusterName.SETTING, "Test")
-                .put(IndexMetaData.SETTING_NUMBER_OF_SHARDS, 1)
-                .put(IndexMetaData.SETTING_NUMBER_OF_REPLICAS, 0)
-                .put(EsExecutors.PROCESSORS, 1)
-                //.put("index.store.type", "memory")
-                .put("path.home", "/home/kostek/elasticsearch/").build();
-        return nodeBuilder().local(true).data(true).settings(settings).node().client();
+    @Bean
+    public String indexPattern(){
+        String indexPattern = null;
+        //indexPattern = propertiesProviderConfig.getPartitionIndexName();
+        return indexPattern;
     }
 
 }

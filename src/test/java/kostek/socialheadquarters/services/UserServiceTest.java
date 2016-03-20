@@ -6,6 +6,7 @@ import org.junit.*;
 import kostek.socialheadquarters.models.User;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -18,9 +19,10 @@ import java.util.Set;
  * Created by Michal Kostewicz on 05.03.16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {WebConfig.class, SpringDataElasticsearchConfigForTest.class})
-@WebAppConfiguration
+@ContextConfiguration(classes = {SpringDataElasticsearchConfigForTest.class})
 public class UserServiceTest {
+    @Autowired
+    ElasticsearchTemplate elasticsearchTemplate;
 
     @Autowired
     UserService userService;
@@ -34,7 +36,8 @@ public class UserServiceTest {
 
     @After
     public void clearData(){
-        userService.deleteAll();
+        elasticsearchTemplate.deleteIndex(User.class);
+        //userService.deleteAll();
     }
 
     @Test

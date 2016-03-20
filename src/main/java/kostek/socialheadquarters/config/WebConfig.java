@@ -1,6 +1,7 @@
 package kostek.socialheadquarters.config;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kostek.socialheadquarters.config.annotations.SkipAtTests;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  * Created by kostek on 01.03.16.
  */
+@SkipAtTests
 @EnableWebMvc
 @Configuration
 @ComponentScan("kostek.socialheadquarters")
