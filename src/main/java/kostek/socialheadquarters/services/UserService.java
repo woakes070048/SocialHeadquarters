@@ -13,14 +13,14 @@ public interface UserService extends BasicAppService<User> {
 
     List<User> findByName(String name);
 
-    void saveUser(User user);
+    void save(User user);
 
-    void updateUser(User user);
+    void updateEnity(User user);
 
-    void deleteUserById(Long id);
+    void deleteEntityById(Long id);
 
-    Set<User> findAllUsers();
+    Set<User> findAllEntities();
 
-    boolean isUserExist(User user);
+    boolean isEntityExist(User user);
 
 }

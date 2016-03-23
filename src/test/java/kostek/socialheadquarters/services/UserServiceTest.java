@@ -1,7 +1,6 @@
 package kostek.socialheadquarters.services;
 
 import kostek.socialheadquarters.config.SpringDataElasticsearchConfigForTest;
-import kostek.socialheadquarters.config.WebConfig;
 import org.junit.*;
 import kostek.socialheadquarters.models.User;
 import org.junit.runner.RunWith;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +27,9 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        userService.saveUser(new User(1L, "Sam", "NY", "sam@abc.com"));
-        userService.saveUser(new User(2L, "Tommy", "ALBAMA", "tomy@abc.com"));
-        userService.saveUser(new User(3L, "Kelly", "NEBRASKA", "kelly@abc.com"));
+        userService.save(new User(1L, "Sam", "NY", "sam@abc.com"));
+        userService.save(new User(2L, "Tommy", "ALBAMA", "tomy@abc.com"));
+        userService.save(new User(3L, "Kelly", "NEBRASKA", "kelly@abc.com"));
     }
 
     @After
@@ -42,7 +40,7 @@ public class UserServiceTest {
 
     @Test
     public void findAllUsersTest() {
-        Set<User> usersFounded = userService.findAllUsers();
+        Set<User> usersFounded = userService.findAllEntities();
         Assert.assertNotNull(usersFounded);
         Assert.assertEquals(3 , usersFounded.size());
     }
@@ -64,7 +62,7 @@ public class UserServiceTest {
     @Test
     public void saveUserTest() {
         User newUser = new User(4L, "Johny", "BRAVO", "johnny@abc.com");
-        userService.saveUser(newUser);
+        userService.save(newUser);
 
         User userFounded = userService.findByName("Johny").get(0);
         Assert.assertNotNull(userFounded);
@@ -75,7 +73,7 @@ public class UserServiceTest {
     public void updateUserTest() {
         User userForUpdate = userService.findById(3L);
         userForUpdate.setName("Richard");
-        userService.updateUser(userForUpdate);
+        userService.updateEnity(userForUpdate);
 
         List<User> userNotFounded = userService.findByName("Kelly");
         Assert.assertEquals(new ArrayList(), userNotFounded);
@@ -89,7 +87,7 @@ public class UserServiceTest {
         User userForDelete = userService.findById(3L);
         Assert.assertNotNull(userForDelete);
 
-        userService.deleteUserById(3L);
+        userService.deleteEntityById(3L);
         User userDeleted = userService.findById(3L);
         Assert.assertNull(userDeleted);
     }
@@ -99,7 +97,7 @@ public class UserServiceTest {
         User existingUser = userService.findById(1L);
         Assert.assertNotNull(existingUser);
 
-        boolean userExist = userService.isUserExist(existingUser);
+        boolean userExist = userService.isEntityExist(existingUser);
         Assert.assertEquals(true , userExist);
     }
 

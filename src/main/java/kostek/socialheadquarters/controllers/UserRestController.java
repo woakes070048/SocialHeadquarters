@@ -26,7 +26,7 @@ public class UserRestController {
 
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
     public ResponseEntity<Set<User>> listAllUsers() {
-        Set<User> users = userService.findAllUsers();
+        Set<User> users = userService.findAllEntities();
         if (users.isEmpty()) {
             return new ResponseEntity<Set<User>>(HttpStatus.NO_CONTENT);
         }
@@ -48,12 +48,12 @@ public class UserRestController {
     public ResponseEntity<Void> saveUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating User " + user.getName());
 
-        if (userService.isUserExist(user)) {
+        if (userService.isEntityExist(user)) {
             System.out.println("A User with name " + user.getName() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
 
-        userService.saveUser(user);
+        userService.save(user);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
@@ -75,7 +75,7 @@ public class UserRestController {
         currentUser.setAddress(user.getAddress());
         currentUser.setEmail(user.getEmail());
 
-        userService.updateUser(currentUser);
+        userService.updateEnity(currentUser);
         return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     }
 
@@ -89,7 +89,7 @@ public class UserRestController {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
 
-        userService.deleteUserById(id);
+        userService.deleteEntityById(id);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
 

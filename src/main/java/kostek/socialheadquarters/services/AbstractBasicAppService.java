@@ -1,6 +1,7 @@
 package kostek.socialheadquarters.services;
 
 import kostek.socialheadquarters.models.AbstractBasicAppEntity;
+import kostek.socialheadquarters.utills.annotations.GenerateId;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.metrics.max.Max;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,11 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.elasticsearch.action.search.SearchType.QUERY_AND_FETCH;
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
@@ -22,23 +28,78 @@ public abstract class AbstractBasicAppService<T extends AbstractBasicAppEntity> 
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
 
+    private T object;
+
+    protected abstract void saveEntity(T object);
+
     protected abstract void deleteAll();
 
     protected abstract Class<T> getServiceDependentClass();
 
+    public void save(T object) {
+        this.object = object;
+        try {
+            generateId();
+            saveEntity(this.object);
+
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void generateId() throws IllegalAccessException {
+        Field fieldWithGeneratedIdAnnotation = checkIfHasGeneratedIdAnnotation();
+        if (checkIfValueIsSet(fieldWithGeneratedIdAnnotation)) {
+            setValueOfField(fieldWithGeneratedIdAnnotation);
+        }
+    }
+
+    private void setValueOfField(Field fieldWithGeneratedIdAnnotation) {
+        //System.out.print("MAX VALUE : " +findMaxId());
+        //fieldWithGeneratedIdAnnotation.set(object , findMaxId());
+    }
+
+    private Field checkIfHasGeneratedIdAnnotation() {
+        List<Field> allClassFields = getAllFields(new ArrayList<>(), object.getClass());
+        Field fieldWithGeneratedIdAnnotation = null;
+        for (Field classField : allClassFields) {
+            if (classField.getAnnotation(GenerateId.class) != null) {
+                fieldWithGeneratedIdAnnotation = classField;
+            }
+        }
+        return fieldWithGeneratedIdAnnotation;
+    }
+
+    private Boolean checkIfValueIsSet(Field field) throws IllegalAccessException {
+        field.setAccessible(true);
+        if (field.get(object) == null) {
+            return false;
+        }else return true;
+    }
+
+    public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
+        fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+        if (type.getSuperclass() != null) {
+            fields = getAllFields(fields, type.getSuperclass());
+        }
+
+        return fields;
+    }
 
     public Long findMaxId() {
-        System.out.print(getServiceDependentClass().getAnnotation(Document.class).indexName());
-        System.out.print(getServiceDependentClass().getAnnotation(Document.class).type());
+        String index = getServiceDependentClass().getAnnotation(Document.class).indexName();
+        String type = getServiceDependentClass().getAnnotation(Document.class).type();
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(matchAllQuery())
                 .withSearchType(QUERY_AND_FETCH)
-                .withIndices("user").withTypes("appuser")
+                .withIndices(index).withTypes(type)
                 .addAggregation(max("max_id").field("id"))
                 .build();
         Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
         Max max = aggregations.get("max_id");
-        Long maxValue = (long)max.getValue();
+        Long maxValue = (long) max.getValue();
         return maxValue;
     }
 

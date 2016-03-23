@@ -1,5 +1,6 @@
 package kostek.socialheadquarters.models;
 
+import kostek.socialheadquarters.utills.annotations.GenerateId;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -7,6 +8,7 @@ import org.springframework.data.annotation.Id;
  */
 public abstract class AbstractBasicAppEntity {
     @Id
+    @GenerateId
     protected Long id;
 
     public Long getId() {

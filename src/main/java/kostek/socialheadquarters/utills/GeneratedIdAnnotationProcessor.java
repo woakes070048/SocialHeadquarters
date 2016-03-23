@@ -7,12 +7,14 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+
 /**
  * Created by Michal Kostewicz on 10.03.16.
  */
 @Component
 public class GeneratedIdAnnotationProcessor implements BeanPostProcessor {
-
     private ConfigurableListableBeanFactory configurableBeanFactory;
 
     @Autowired
@@ -34,15 +36,16 @@ public class GeneratedIdAnnotationProcessor implements BeanPostProcessor {
     }
 
     protected void scanGeneratedIdAnnotation(Object bean, String beanName) {
-        this.configureFieldInjection(bean);
+
     }
 
     private void configureFieldInjection(Object bean) {
         Class<?> managedBeanClass = bean.getClass();
-        /*ReflectionUtils.FieldCallback fieldCallback =
-                new GeneratdIdFieldCallback(configurableBeanFactory, bean);*/
-/*
+
+        ReflectionUtils.FieldCallback fieldCallback =
+                new GeneratedIdFieldCallback(configurableBeanFactory, bean);
+
         ReflectionUtils.doWithFields(managedBeanClass, fieldCallback);
-*/
+
     }
 }

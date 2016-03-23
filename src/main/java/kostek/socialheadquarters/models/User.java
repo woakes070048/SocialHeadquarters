@@ -1,5 +1,6 @@
 package kostek.socialheadquarters.models;
 
+import kostek.socialheadquarters.utills.annotations.GenerateId;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldIndex;

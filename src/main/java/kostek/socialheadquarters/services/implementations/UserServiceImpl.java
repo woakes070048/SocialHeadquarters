@@ -28,7 +28,7 @@ import static org.elasticsearch.search.aggregations.AggregationBuilders.max;
  */
 @Service("userService")
 @Transactional
-public class UserServiceImpl extends AbstractBasicAppService implements UserService {
+public class UserServiceImpl extends AbstractBasicAppService<User> implements UserService {
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
 
@@ -36,7 +36,7 @@ public class UserServiceImpl extends AbstractBasicAppService implements UserServ
     UserRepository userRepository;
 
     @Override
-    public Set<User> findAllUsers() {
+    public Set<User> findAllEntities() {
         Set<User> userSet = new HashSet<User>();
         for (User user : userRepository.findAll()) {
             userSet.add(user);
@@ -54,24 +54,23 @@ public class UserServiceImpl extends AbstractBasicAppService implements UserServ
         return userRepository.findByName(name);
     }
 
-    @Override
-    public void saveUser(User user) {
+    public void saveEntity(User user) {
         userRepository.save(user);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateEnity(User user) {
         userRepository.save(user);
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteEntityById(Long id) {
         userRepository.delete(id);
 
     }
 
     @Override
-    public boolean isUserExist(User user) {
+    public boolean isEntityExist(User user) {
         return !findByName(user.getName()).isEmpty();
     }
 
