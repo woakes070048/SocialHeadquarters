@@ -7,6 +7,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
@@ -17,13 +18,14 @@ import java.net.UnknownHostException;
  * Created by Michal Kostewicz on 20.03.16.
  */
 @SkipAtTests
+@PropertySource("classpath:transport_node.properties")
 @Component
 public class ElasticsearchTransportNode implements ElasticsearchClientFactory {
     @Value("${addres}")
     String addres;
     @Value("${port}")
     String port;
-    @Value("${cluster_name}")
+    @Value("${cluster}")
     String clusterName;
 
     private Client client;

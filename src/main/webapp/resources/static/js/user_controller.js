@@ -1,5 +1,4 @@
 
-
 app.controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
           var self = this;
           self.user={id:null,name:'',address:'',email:''};

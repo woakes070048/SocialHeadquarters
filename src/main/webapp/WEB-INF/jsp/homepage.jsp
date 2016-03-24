@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Spring and Angularjs Tutorial</title>
+    <title>Social Headquarters</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -24,7 +24,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-        <li><a href="#/gallery">Photo Gallery</a></li>
+        <li><a href="#/users">Users Administration</a></li>
         <li><a href="#/contactus">Contact</a></li>
     </ul>
     </div>

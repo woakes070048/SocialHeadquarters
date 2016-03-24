@@ -5,8 +5,8 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: 'resources/static/views/home.html',
             controller: 'MainController'
         })
-        .when('/gallery',{
-            templateUrl: 'resources/static/views/gallery.html',
+        .when('/users',{
+            templateUrl: 'resources/static/views/admin_users.html',
             controller: 'UserController'
         })
         .when('/contactus',{
