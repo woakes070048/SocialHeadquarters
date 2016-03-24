@@ -27,6 +27,8 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
+        elasticsearchTemplate.createIndex(User.class);
+        elasticsearchTemplate.putMapping(User.class);
         userService.save(new User(1L, "Sam", "NY", "sam@abc.com"));
         userService.save(new User(2L, "Tommy", "ALBAMA", "tomy@abc.com"));
         userService.save(new User(3L, "Kelly", "NEBRASKA", "kelly@abc.com"));
