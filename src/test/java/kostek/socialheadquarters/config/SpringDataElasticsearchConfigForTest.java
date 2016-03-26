@@ -2,6 +2,10 @@ package kostek.socialheadquarters.config;
 
 import kostek.socialheadquarters.config.annotations.SkipAtTests;
 
+import kostek.socialheadquarters.models.Brand;
+import kostek.socialheadquarters.models.FacebookAccount;
+import kostek.socialheadquarters.models.User;
+import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,14 +33,15 @@ public class SpringDataElasticsearchConfigForTest {
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() {
             elasticsearchClientFactory.createClient();
-        return new ElasticsearchTemplate(elasticsearchClientFactory.getClient());
-    }
-
-    @Bean
-    public String indexPattern(){
-        String indexPattern = null;
-        //indexPattern = propertiesProviderConfig.getPartitionIndexName();
-        return indexPattern;
+        ElasticsearchOperations elasticsearchOperations = new ElasticsearchTemplate(elasticsearchClientFactory.getClient());
+        //We need to add facebookAccount first because it has parent and need to be created first
+        elasticsearchOperations.createIndex(FacebookAccount.class);
+        elasticsearchOperations.putMapping(FacebookAccount.class);
+        elasticsearchOperations.createIndex(Brand.class);
+        elasticsearchOperations.putMapping(Brand.class);
+        elasticsearchOperations.createIndex(User.class);
+        elasticsearchOperations.putMapping(User.class);
+        return elasticsearchOperations;
     }
 
 }

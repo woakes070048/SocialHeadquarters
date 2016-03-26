@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * Created by Michal Kostewicz on 02.03.16.
  */
-@Document( indexName = "user" , type = "appuser")
+@Document( indexName = "user_types" , type = "appuser")
 public class User extends AbstractBasicAppEntity implements Serializable{
 
     @Field(

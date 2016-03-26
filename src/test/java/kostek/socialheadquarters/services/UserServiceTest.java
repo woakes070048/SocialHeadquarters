@@ -1,8 +1,11 @@
 package kostek.socialheadquarters.services;
 
 import kostek.socialheadquarters.config.SpringDataElasticsearchConfigForTest;
-import org.junit.*;
 import kostek.socialheadquarters.models.User;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
@@ -26,44 +29,42 @@ public class UserServiceTest {
     UserService userService;
 
     @Before
-    public void setUp() {
-        elasticsearchTemplate.createIndex(User.class);
-        elasticsearchTemplate.putMapping(User.class);
-        userService.save(new User(1L, "Sam", "NY", "sam@abc.com"));
-        userService.save(new User(2L, "Tommy", "ALBAMA", "tomy@abc.com"));
-        userService.save(new User(3L, "Kelly", "NEBRASKA", "kelly@abc.com"));
+    public void setUp() throws InterruptedException {
+        Thread.sleep(100);
+        userService.save(new User(null, "Sam", "NY", "sam@abc.com"));
+        userService.save(new User(null, "Tommy", "ALBAMA", "tomy@abc.com"));
+        userService.save(new User(null, "Kelly", "NEBRASKA", "kelly@abc.com"));
     }
 
     @After
-    public void clearData(){
-        elasticsearchTemplate.deleteIndex(User.class);
-        //userService.deleteAll();
+    public void clearData() {
+        userService.deleteAll();
     }
 
     @Test
     public void findAllUsersTest() {
         Set<User> usersFounded = userService.findAllEntities();
         Assert.assertNotNull(usersFounded);
-        Assert.assertEquals(3 , usersFounded.size());
+        Assert.assertEquals(3, usersFounded.size());
     }
 
     @Test
     public void findByIdTest() {
         User userFounded = userService.findById(3L);
         Assert.assertNotNull(userFounded);
-        Assert.assertEquals(Long.valueOf(3) , userFounded.getId());
+        Assert.assertEquals(Long.valueOf(3), userFounded.getId());
     }
 
     @Test
     public void findByNameTest() {
         User userFounded = userService.findByName("Tommy").get(0);
         Assert.assertNotNull(userFounded);
-        Assert.assertEquals("Tommy" , userFounded.getName());
+        Assert.assertEquals("Tommy", userFounded.getName());
     }
 
     @Test
     public void saveUserTest() {
-        User newUser = new User(4L, "Johny", "BRAVO", "johnny@abc.com");
+        User newUser = new User(null, "Johny", "BRAVO", "johnny@abc.com");
         userService.save(newUser);
 
         User userFounded = userService.findByName("Johny").get(0);
@@ -100,12 +101,12 @@ public class UserServiceTest {
         Assert.assertNotNull(existingUser);
 
         boolean userExist = userService.isEntityExist(existingUser);
-        Assert.assertEquals(true , userExist);
+        Assert.assertEquals(true, userExist);
     }
 
     @Test
-    public void findMaxIdTest(){
-        Long maxId = userService.findMaxId();
-        Assert.assertEquals(Long.valueOf(3), maxId);
+    public void findNewMaxIdTest() {
+        Long maxId = userService.findNewMaxId();
+        Assert.assertEquals(Long.valueOf(4), maxId);
     }
 }

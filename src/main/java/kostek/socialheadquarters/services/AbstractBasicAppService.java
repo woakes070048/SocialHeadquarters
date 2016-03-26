@@ -41,7 +41,6 @@ public abstract class AbstractBasicAppService<T extends AbstractBasicAppEntity> 
         try {
             generateId();
             saveEntity(this.object);
-
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -55,9 +54,9 @@ public abstract class AbstractBasicAppService<T extends AbstractBasicAppEntity> 
         }
     }
 
-    private void setValueOfField(Field fieldWithGeneratedIdAnnotation) {
-        //System.out.print("MAX VALUE : " +findMaxId());
-        //fieldWithGeneratedIdAnnotation.set(object , findMaxId());
+    private void setValueOfField(Field fieldWithGeneratedIdAnnotation) throws IllegalAccessException {
+        Long newMaxIdForEntity = findNewMaxId();
+        fieldWithGeneratedIdAnnotation.set(object , newMaxIdForEntity);
     }
 
     private Field checkIfHasGeneratedIdAnnotation() {
@@ -73,22 +72,18 @@ public abstract class AbstractBasicAppService<T extends AbstractBasicAppEntity> 
 
     private Boolean checkIfValueIsSet(Field field) throws IllegalAccessException {
         field.setAccessible(true);
-        if (field.get(object) == null) {
-            return false;
-        }else return true;
+        return field.get(object) == null;
     }
 
     public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
         fields.addAll(Arrays.asList(type.getDeclaredFields()));
-
         if (type.getSuperclass() != null) {
             fields = getAllFields(fields, type.getSuperclass());
         }
-
         return fields;
     }
 
-    public Long findMaxId() {
+    public Long findNewMaxId() {
         String index = getServiceDependentClass().getAnnotation(Document.class).indexName();
         String type = getServiceDependentClass().getAnnotation(Document.class).type();
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -100,7 +95,10 @@ public abstract class AbstractBasicAppService<T extends AbstractBasicAppEntity> 
         Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
         Max max = aggregations.get("max_id");
         Long maxValue = (long) max.getValue();
-        return maxValue;
+        if (maxValue < 0 ){
+            return 1L;
+        }
+        return maxValue + 1;
     }
 
     public ElasticsearchTemplate getElasticsearchTemplate() {

@@ -1,27 +1,6 @@
 <html>
 <head>
-    <title>Application users</title>
-    <style>
-        .name.ng-valid {
-        background-color: lightgreen;
-        }
-        .name.ng-dirty.ng-invalid-required {
-        background-color: red;
-        }
-        .name.ng-dirty.ng-invalid-minlength {
-        background-color: yellow;
-        }
-
-        .email.ng-valid {
-        background-color: lightgreen;
-        }
-        .email.ng-dirty.ng-invalid-required {
-        background-color: red;
-        }
-        .email.ng-dirty.ng-invalid-email {
-        background-color: yellow;
-        }
-    </style>
+    <title>{{headingTitle}}</title>
 </head>
 <body ng-app="app" class="ng-cloak">
 <div class="generic-container" ng-controller="UserController as ctrl">
@@ -30,7 +9,6 @@
         <div class="formcontainer">
             <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                 <input type="hidden" ng-model="ctrl.user.id" />
-                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="uname">Name</label>
                         <div class="col-md-7">
@@ -42,19 +20,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-
-                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="address">Address</label>
                         <div class="col-md-7">
                             <input type="text" ng-model="ctrl.user.address" id="address" class="form-control input-sm" placeholder="Enter your Address. [This field is validation free]"/>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="email">Email</label>
                         <div class="col-md-7">
@@ -65,14 +38,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
                     <div class="form-actions">
                         <input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                         <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
                     </div>
-                </div>
             </form>
         </div>
     </div>
