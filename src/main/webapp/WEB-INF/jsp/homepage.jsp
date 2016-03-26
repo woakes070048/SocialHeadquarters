@@ -25,6 +25,7 @@
         <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
         <li><a href="#/users">Users Administration</a></li>
+        <li><a href="#/brands">Brands</a></li>
         <li><a href="#/contactus">Contact</a></li>
     </ul>
     </div>
@@ -39,6 +40,8 @@
 <script src="../resources/static/js/controller.js"></script>
 <script src="../resources/static/js/user_service.js"></script>
 <script src="../resources/static/js/user_controller.js"></script>
+<script src="../resources/static/js/brand_service.js"></script>
+<script src="../resources/static/js/brand_controller.js"></script>
 <script src="./webjars/angular-ui-bootstrap/1.1.1-1/ui-bootstrap.js"></script>
 <link rel="stylesheet" href="./webjars/bootstrap/3.3.6/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/static/css/custom.css">

@@ -9,6 +9,14 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: 'resources/static/views/admin_users.html',
             controller: 'UserController'
         })
+         .when('/brands',{
+                    templateUrl: 'resources/static/views/user_brands.html',
+                    controller: 'BrandController'
+                })
+        .when('/brand', {
+                       templateUrl: 'resources/static/views/manage_brand.html',
+                       controller: 'BrandController'
+                })
         .when('/contactus',{
             templateUrl: 'resources/static/views/contactus.html',
             controller: 'ContactController'

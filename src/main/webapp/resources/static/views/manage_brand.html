@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage your Brand!</title>
+</head>
+<body ng-app="app" class="ng-cloak">
+<div class="generic-container" ng-controller="BrandController as ctrl">
+
+<div class="panel panel-primary">
+    <div class="panel-heading"><h4>Brand</h4></div>
+    <div class="panel-body">
+        <label for="brandId"> ID: </label>
+        <div id="brandId" >{{sharedBrand.id}}</div>
+        <label for="brandName"> Name: </label>
+        <div id="brandName" >{{sharedBrand.name}}</div>
+        <label for="brandDescription"> Description: </label>
+        <div id="brandDescription" >{{sharedBrand.description}}</div>
+    </div>
+</div>
+
+{{ctrl.brandId}}
+    {{sharedBrand}}
+
+    </div>
+</body>
+</html>
