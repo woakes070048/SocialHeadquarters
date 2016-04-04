@@ -1,6 +1,8 @@
 package kostek.socialheadquarters.controllers;
 
+import kostek.socialheadquarters.models.AbstractSocialMediaAccount;
 import kostek.socialheadquarters.models.Brand;
+import kostek.socialheadquarters.models.FacebookAccount;
 import kostek.socialheadquarters.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -77,6 +79,16 @@ public class BrandRestController {
         return new ResponseEntity<Brand>(HttpStatus.NO_CONTENT);
     }
 
+    @RequestMapping(value = "/brand/{id}/facebook/", method = RequestMethod.GET)
+    public ResponseEntity<FacebookAccount> fetchBrandFacebookAccounts(@PathVariable("id") Long id) {
+        Brand currentBrand = brandService.findById(id);
+        if (currentBrand == null) {
+            System.out.println("Brand with id " + id + " not found");
+            return new ResponseEntity<FacebookAccount>(HttpStatus.NOT_FOUND);
+        }
+        FacebookAccount facebookAccount = brandService.findFacebookAccountByBrandId(id);
+        return new ResponseEntity<FacebookAccount>(facebookAccount, HttpStatus.OK);
+    }
 }
 
 

@@ -39,6 +39,18 @@ app.service('BrandService', ['$http', '$q', function($http, $q){
                                     }
                             );
             },
+            fetchBrandFacebookAccounts: function(id){
+                                return $http.get('http://localhost:8080/brand/'+id+'/facebook/')
+                                        .then(
+                                                function(response){
+                                                    return response.data;
+                                                },
+                                                function(errResponse){
+                                                    console.error('Error while updating brand');
+                                                    return $q.reject(errResponse);
+                                                }
+                                        );
+                        },
 
             deleteBrand: function(id){
                     return $http.delete('http://localhost:8080/brand/'+id)
@@ -57,24 +69,28 @@ app.service('BrandService', ['$http', '$q', function($http, $q){
 
 }]);
 app.service('sharedProperties', function() {
-    var sharedBrand;
-    var objectValue = {
-        data: 'test object value'
-    };
-    var brandData = [];
+    var viewedBrand;
+    var brandFacebookAccount;
+    var brandList = [];
 
     return {
-        setBrandData: function(value) {
-            brandData = value;
+        setBrandList: function(value) {
+            brandList = value;
         },
-         getBrandData: function() {
-                    return brandData;
-                },
-        setSharedBrand: function(value) {
-            sharedBrand = value;
+        getBrandList: function() {
+                    return brandList;
         },
-        getSharedBrand: function() {
-                   return sharedBrand;
-               }
+        setViewedBrand: function(value) {
+            viewedBrand = value;
+        },
+        getViewedBrand: function() {
+                   return viewedBrand;
+        },
+        setBrandFacebookAccount: function(value) {
+            brandFacebookAccount = value;
+         },
+        getBrandFacebookAccount: function() {
+            return brandFacebookAccount;
+         }
     }
 });

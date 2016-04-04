@@ -86,6 +86,9 @@ public class BrandServiceImpl extends AbstractBasicAppService<Brand> implements 
         CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria("brandId").is(brandId));
         // when
         List<FacebookAccount> page = elasticsearchTemplate.queryForList(criteriaQuery, FacebookAccount.class);
+        if (page.size() < 1){
+            return null;
+        }
         return page.get(0);
     }
 }

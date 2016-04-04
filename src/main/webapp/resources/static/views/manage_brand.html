@@ -11,16 +11,31 @@
     <div class="panel-heading"><h4>Brand</h4></div>
     <div class="panel-body">
         <label for="brandId"> ID: </label>
-        <div id="brandId" >{{sharedBrand.id}}</div>
+        <div id="brandId" >{{viewedBrand.id}}</div>
         <label for="brandName"> Name: </label>
-        <div id="brandName" >{{sharedBrand.name}}</div>
+        <div id="brandName" >{{viewedBrand.name}}</div>
         <label for="brandDescription"> Description: </label>
-        <div id="brandDescription" >{{sharedBrand.description}}</div>
+        <div id="brandDescription" >{{viewedBrand.description}}</div>
+        </div>
+    <div class="panel panel-info">
+        <div class="panel-heading"><h4>Facebook Account</h4>
+            <button type="button" ng-click="ctrl.addEditFacebookAccount(viewedBrand.id)" class="btn btn-success custom-width">
+            Add/Edit
+        </button></div>
+        <div class="panel-body">
+            <label for="faceKey"> Key: </label>
+            <div id="faceKey" >{{brandFacebookAccount.appKey}}</div>
+            <label for="faceSecret"> Secret: </label>
+            <div id="faceSecret" >{{brandFacebookAccount.appSecret}}</div>
+        </div>
+        </div>
     </div>
+
+
 </div>
 
-{{ctrl.brandId}}
-    {{sharedBrand}}
+{{brandFacebookAccount}}
+    {{ctrl.viewedBrand}}
 
     </div>
 </body>

@@ -1,11 +1,12 @@
 
-app.controller('BrandController', ['$scope','$routeParams','BrandService' ,'sharedProperties', function($scope, $routeParams, BrandService, sharedProperties) {
+app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'sharedProperties', function($scope, $routeParams, ngDialog ,BrandService, sharedProperties) {
           var self = this;
           self.brand={id:null,name:'',description:''};
           self.brands = [];
           self.brandId = parseInt( $routeParams.brandId, 10);
-          $scope.objectValue = sharedProperties.getBrandData()
-          $scope.sharedBrand = sharedProperties.getSharedBrand()
+          $scope.brandList = sharedProperties.getBrandList();
+          $scope.viewedBrand = sharedProperties.getViewedBrand();
+          $scope.brandFacebookAccount = sharedProperties.getBrandFacebookAccount();
 
 
           self.fetchAllBrands = function(){
@@ -13,7 +14,7 @@ app.controller('BrandController', ['$scope','$routeParams','BrandService' ,'shar
                   .then(
                                function(fetchedBrands) {
                                     self.brands = fetchedBrands;
-                                    sharedProperties.setBrandData(self.brands);
+                                    sharedProperties.setBrandList(self.brands);
 
                                },
                                 function(errResponse){
@@ -74,11 +75,23 @@ app.controller('BrandController', ['$scope','$routeParams','BrandService' ,'shar
                   }
               }
           };
-          self.initBrand = function(id){
+          self.fetchBrandAccounts = function(id){
+               BrandService.fetchBrandFacebookAccounts(id)
+                   .then(
+                                function(fetchedAccounts) {
+                                     sharedProperties.setBrandFacebookAccount(fetchedAccounts);
 
-              for(var i = 0; i <  $scope.objectValue.length; i++){
-                  if( $scope.objectValue[i].id === id) {
-                     sharedProperties.setSharedBrand(angular.copy( $scope.objectValue[i]));
+                                },
+                                 function(errResponse){
+                                     console.error('Error while fetching Brand Accounts');
+                                 }
+                        );
+           };
+          self.initBrand = function(id){
+              for(var i = 0; i <  self.brands.length; i++){
+                  if( self.brands[i].id === id) {
+                     sharedProperties.setViewedBrand(angular.copy( self.brands[i]));
+                     self.fetchBrandAccounts(id);
                      break;
                   }
               }
@@ -94,5 +107,10 @@ app.controller('BrandController', ['$scope','$routeParams','BrandService' ,'shar
               self.brand={id:null,name:'',description:''};
               $scope.myForm.$setPristine(); //reset Form
           };
-        //self.initBrand(self.brandId);
+          self.addEditFacebookAccount = function(id){
+               ngDialog.open({
+                template: 'resources/static/views/modals/modalFacebook.html',
+                plain: false
+                });
+}
       }]);

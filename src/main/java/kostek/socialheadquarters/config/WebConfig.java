@@ -61,13 +61,12 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
     MappingJackson2HttpMessageConverter jacksonConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        //do your customizations here...
         return converter;
     }
 
     @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conferrer) {
-        conferrer.enable();
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 
 }
