@@ -1,5 +1,5 @@
 
-app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'sharedProperties', function($scope, $routeParams, ngDialog ,BrandService, sharedProperties) {
+app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService','FacebookAccountService','sharedProperties', function($scope, $routeParams, ngDialog ,BrandService,FacebookAccountService, sharedProperties) {
           var self = this;
           self.brand={id:null,name:'',description:''};
           self.brands = [];
@@ -75,8 +75,8 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
                   }
               }
           };
-          self.fetchBrandAccounts = function(id){
-               BrandService.fetchBrandFacebookAccounts(id)
+          self.fetchBrandAccounts = function(brandId){
+               FacebookAccountService.fetchFacebookAccount(brandId)
                    .then(
                                 function(fetchedAccounts) {
                                      sharedProperties.setBrandFacebookAccount(fetchedAccounts);
@@ -110,7 +110,8 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
           self.addEditFacebookAccount = function(id){
                ngDialog.open({
                 template: 'resources/static/views/modals/modalFacebook.html',
-                plain: false
+                plain: false,
+                controller: 'FacebookAccountController'
                 });
 }
       }]);

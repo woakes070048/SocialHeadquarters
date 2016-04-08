@@ -21,7 +21,7 @@ app.service('BrandService', ['$http', '$q', function($http, $q){
                                         return response.data;
                                     },
                                     function(errResponse){
-                                        console.error('Error while creating user');
+                                        console.error('Error while creating brand');
                                         return $q.reject(errResponse);
                                     }
                             );
@@ -39,19 +39,6 @@ app.service('BrandService', ['$http', '$q', function($http, $q){
                                     }
                             );
             },
-            fetchBrandFacebookAccounts: function(id){
-                                return $http.get('http://localhost:8080/brand/'+id+'/facebook/')
-                                        .then(
-                                                function(response){
-                                                    return response.data;
-                                                },
-                                                function(errResponse){
-                                                    console.error('Error while updating brand');
-                                                    return $q.reject(errResponse);
-                                                }
-                                        );
-                        },
-
             deleteBrand: function(id){
                     return $http.delete('http://localhost:8080/brand/'+id)
                             .then(

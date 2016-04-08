@@ -1,15 +1,48 @@
-    <div class="modal-dialog">
+<div class="generic-container" ng-controller="FacebookAccountController as ctrl">
+
+<div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="close" ng-click="closeThisDialog('Some value')"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add or Edit Facebook Account</h4>
             </div>
             <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <div class="formcontainer">
+                    <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                        <input type="hidden" ng-model="ctrl.facebookAccount.id" />
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="appkey">App key</label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="ctrl.facebookAccount.appKey" id="appkey" class="name form-control input-sm" placeholder="Enter your facebook app key" required ng-minlength="3"/>
+                                <div class="has-error" ng-show="myForm.$dirty">
+                                    <span ng-show="myForm.appkey.$error.required">This is a required field</span>
+                                    <span ng-show="myForm.appkey.$error.minlength">Minimum length required is 3</span>
+                                    <span ng-show="myForm.appkey.$invalid">This field is invalid </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="appsecret">App Secret</label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="ctrl.facebookAccount.appSecret" id="appsecret" class="name form-control input-sm" placeholder="Enter facebook app secret" required/>
+                                <div class="has-error" ng-show="myForm.$dirty">
+                                    <span ng-show="myForm.appkey.$error.required">This is a required field</span>
+                                    <span ng-show="myForm.email.$error.required">This is a required field</span>
+                                    <span ng-show="myForm.email.$invalid">This field is invalid </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <input type="submit"  value="{{!ctrl.facebookAccount.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                            <button type="button" ng-click="closeThisDialog('Some value')" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
+</div>
