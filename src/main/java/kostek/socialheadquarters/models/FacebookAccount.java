@@ -9,34 +9,37 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  */
 @Document( indexName = "brands_data" , type = "facebook")
 public class FacebookAccount extends AbstractSocialMediaAccount{
-    private String appKey;
 
-    private String appSecret;
+    @Field(type = FieldType.String, store = true)
+    private String appId;
 
-    public FacebookAccount(Long id, String appKey, String appSecret, Long brandId) {
+    @Field(type = FieldType.String, store = true)
+    private String secretKey;
+
+    public FacebookAccount(Long id, String appId, String secretKey, Long brandId) {
         this.id = id;
-        this.appKey = appKey;
-        this.appSecret = appSecret;
+        this.appId = appId;
+        this.secretKey = secretKey;
         this.brandId = brandId;
     }
 
     public FacebookAccount() {
     }
 
-    public String getAppKey() {
-        return appKey;
+    public String getAppId() {
+        return appId;
     }
 
-    public void setAppKey(String appKey) {
-        this.appKey = appKey;
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
-    public String getAppSecret() {
-        return appSecret;
+    public String getSecretKey() {
+        return secretKey;
     }
 
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     @Override
@@ -47,16 +50,16 @@ public class FacebookAccount extends AbstractSocialMediaAccount{
 
         FacebookAccount that = (FacebookAccount) o;
 
-        if (!appKey.equals(that.appKey)) return false;
-        return appSecret.equals(that.appSecret);
+        if (!appId.equals(that.appId)) return false;
+        return secretKey.equals(that.secretKey);
 
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + appKey.hashCode();
-        result = 31 * result + appSecret.hashCode();
+        result = 31 * result + appId.hashCode();
+        result = 31 * result + secretKey.hashCode();
         return result;
     }
 }

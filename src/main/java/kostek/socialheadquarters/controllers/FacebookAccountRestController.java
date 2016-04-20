@@ -24,7 +24,7 @@ public class FacebookAccountRestController {
     @RequestMapping(value = "/brand/facebookaccount/", method = RequestMethod.POST)
     public ResponseEntity<Void> saveFacebookAccount(@RequestBody FacebookAccount facebookAccount, UriComponentsBuilder ucBuilder) {
         if (facebookAccountService.isEntityExist(facebookAccount)) {
-            System.out.println("A Facebook with appKey " + facebookAccount.getAppKey() + " already exist");
+            System.out.println("A Facebook with appKey " + facebookAccount.getAppId() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
         facebookAccountService.save(facebookAccount);
@@ -42,8 +42,8 @@ public class FacebookAccountRestController {
             return new ResponseEntity<FacebookAccount>(HttpStatus.NOT_FOUND);
         }
 
-        currentFacebookAccount.setAppKey(facebookAccount.getAppKey());
-        currentFacebookAccount.setAppSecret(facebookAccount.getAppSecret());
+        currentFacebookAccount.setAppId(facebookAccount.getAppId());
+        currentFacebookAccount.setSecretKey(facebookAccount.getSecretKey());
 
         facebookAccountService.updateEnity(currentFacebookAccount);
         return new ResponseEntity<FacebookAccount>(currentFacebookAccount, HttpStatus.OK);

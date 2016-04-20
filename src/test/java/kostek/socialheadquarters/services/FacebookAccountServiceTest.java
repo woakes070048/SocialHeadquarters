@@ -70,11 +70,11 @@ public class FacebookAccountServiceTest {
     @Test
     public void updateFacebookAccountTest() {
         FacebookAccount faceAccountForUpdate = facebookAccountService.findById(3L);
-        faceAccountForUpdate.setAppKey("AppKeySet");
+        faceAccountForUpdate.setAppId("AppKeySet");
         facebookAccountService.updateEnity(faceAccountForUpdate);
 
         FacebookAccount faceAccountFounded = facebookAccountService.findById(3L);
-        Assert.assertEquals("AppKeySet", faceAccountFounded.getAppKey());
+        Assert.assertEquals("AppKeySet", faceAccountFounded.getAppId());
     }
 
     @Test

@@ -11,6 +11,7 @@ public abstract class AbstractSocialMediaAccount extends AbstractBasicAppEntity{
     @Field(type = FieldType.Long, store = true)
     protected  Long brandId;
 
+    @Field(type = FieldType.String, store = true)
     protected String accountName;
 
     public AbstractSocialMediaAccount() {
