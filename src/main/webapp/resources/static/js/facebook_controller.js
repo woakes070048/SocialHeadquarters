@@ -2,7 +2,6 @@
 app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'FacebookAccountService','sharedProperties', function($scope, $routeParams, ngDialog ,BrandService,FacebookAccountService, sharedProperties) {
           var self = this;
           self.facebookAccount={id:null,appId:'',secretKey:'',brandId:null};
-          $scope.brandFacebookAccount = sharedProperties.getBrandFacebookAccount();
           $scope.viewedBrand = sharedProperties.getViewedBrand();
 
 
@@ -25,6 +24,21 @@ app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' 
                               }
                   );
           };
+
+         self.fetchFacebookAccount = function(brandId){
+               FacebookAccountService.fetchFacebookAccount(brandId)
+                   .then(
+                                function(fetchedAccount) {
+                                     sharedProperties.setBrandFacebookAccount(fetchedAccount);
+                                     self.facebookAccount = fetchedAccount;
+                                },
+                                 function(errResponse){
+                                     console.error('Error while fetching Brand Accounts');
+                                 }
+                        );
+           };
+
+          self.fetchFacebookAccount($scope.viewedBrand.id);
 
           self.submit = function() {
               if(self.facebookAccount.id===null){

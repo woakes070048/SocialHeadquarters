@@ -79,8 +79,9 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
           self.fetchBrandAccounts = function(brandId){
                FacebookAccountService.fetchFacebookAccount(brandId)
                    .then(
-                                function(fetchedAccounts) {
-                                     sharedProperties.setBrandFacebookAccount(fetchedAccounts);
+                                function(fetchedAccount) {
+                                     sharedProperties.setBrandFacebookAccount(fetchedAccount);
+                                     $scope.brandFacebookAccount = sharedProperties.getBrandFacebookAccount();
 
                                 },
                                  function(errResponse){
@@ -101,7 +102,7 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
 
           self.remove = function(id){
               console.log('id to be deleted', id);
-              if(self.brand.id === id) {//clean form if the user to be deleted is shown there.
+              if(self.brand.id === id) {
                  self.reset();
               }
               self.deleteBrand(id);
@@ -109,7 +110,7 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
 
           self.reset = function(){
               self.brand={id:null,name:'',description:''};
-              $scope.myForm.$setPristine(); //reset Form
+              $scope.myForm.$setPristine();
           };
 
           self.addEditFacebookAccount = function(id){
