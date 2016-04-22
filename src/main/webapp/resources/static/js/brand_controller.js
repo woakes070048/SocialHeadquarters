@@ -113,7 +113,7 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
               $scope.myForm.$setPristine();
           };
 
-          self.addEditFacebookAccount = function(id){
+          self.addEditFacebookAccount = function(){
                ngDialog.open({
                 template: 'resources/static/views/modals/modalFacebook.html',
                 plain: false,
