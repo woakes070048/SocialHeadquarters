@@ -32,7 +32,6 @@ app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' 
                                 function(fetchedAccount) {
                                      sharedProperties.setBrandFacebookAccount(fetchedAccount);
                                      self.facebookAccount = fetchedAccount;
-                                    $scope.$apply(function(){self.facebookAccount = fetchedAccount;});
                                 },
                                  function(errResponse){
                                      console.error('Error while fetching Brand Accounts');

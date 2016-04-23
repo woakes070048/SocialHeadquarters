@@ -1,13 +1,16 @@
 
-app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService','FacebookAccountService','sharedProperties', function($scope, $routeParams, ngDialog ,BrandService,FacebookAccountService, sharedProperties) {
+app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService','FacebookAccountService','sharedProperties', '$timeout', function($scope, $routeParams, ngDialog ,BrandService,FacebookAccountService, sharedProperties, $timeout) {
           var self = this;
           self.brand={id:null,name:'',description:''};
           self.brands = [];
           self.brandId = parseInt( $routeParams.brandId, 10);
           $scope.brandList = sharedProperties.getBrandList();
           $scope.viewedBrand = sharedProperties.getViewedBrand();
-          $scope.brandFacebookAccount = sharedProperties.getBrandFacebookAccount();
+          $scope.facebook = sharedProperties.getBrandFacebookAccount();
 
+    $timeout(function () {
+          $scope.facebook = sharedProperties.getBrandFacebookAccount();
+    }, 100);
 
           self.fetchAllBrands = function(){
               BrandService.fetchAllBrands()
@@ -81,8 +84,6 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
                    .then(
                                 function(fetchedAccount) {
                                      sharedProperties.setBrandFacebookAccount(fetchedAccount);
-                                     $scope.brandFacebookAccount = sharedProperties.getBrandFacebookAccount();
-
                                 },
                                  function(errResponse){
                                      console.error('Error while fetching Brand Accounts');
@@ -98,7 +99,7 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
                      break;
                   }
               }
-          };
+          }
 
           self.remove = function(id){
               console.log('id to be deleted', id);

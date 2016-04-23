@@ -55,10 +55,10 @@ app.service('BrandService', ['$http', '$q', function($http, $q){
     };
 
 }]);
-app.service('sharedProperties', function() {
+app.factory('sharedProperties', function() {
     var viewedBrand;
-    var brandFacebookAccount;
     var brandList = [];
+    var brandFacebookAccount;
 
     return {
         setBrandList: function(value) {
