@@ -23,11 +23,22 @@
             Add/Edit
         </button></div>
         <div class="panel-body">
-            <label for="faceKey"> App ID: </label>
-            <div id="faceKey" >{{facebook.appId}}</div>
-            <label for="faceSecret"> Secret key: </label>
-            <div id="faceSecret" >{{facebook.secretKey}}</div>
+            <tabs>
+                <pane title="Informations">
+                    <div>
+                        <br/>
+                        <label for="faceKey"> App ID: </label>
+                        <div id="faceKey" >{{facebook.appId}}</div>
+                        <label for="faceSecret"> Secret key: </label>
+                        <div id="faceSecret" >{{facebook.secretKey}}</div>
+                    </div>
+                </pane>
+                <pane title="Second Tab">
+                    <div>This is the content of the second tab.</div>
+                </pane>
+            </tabs>
         </div>
+
         </div>
     </div>
 
