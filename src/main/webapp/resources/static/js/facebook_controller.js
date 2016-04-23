@@ -9,7 +9,6 @@ app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' 
               facebookAccount.brandId = $scope.viewedBrand.id;
               FacebookAccountService.createFacebookAccount(facebookAccount)
                       .then(
-                           self.fetchFacebookAccount(facebookAccount.brandId),
                               function(errResponse){
                                    console.error('Error while creating FacebookAccount.');
                               }
@@ -19,7 +18,6 @@ app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' 
          self.updateFacebookAccount = function(facebookAccount, id){
               FacebookAccountService.updateFacebookAccount(facebookAccount, id)
                       .then(
-                          self.fetchFacebookAccount(facebookAccount.brandId),
                               function(errResponse){
                                    console.error('Error while updating FacebookAccount.');
                               }

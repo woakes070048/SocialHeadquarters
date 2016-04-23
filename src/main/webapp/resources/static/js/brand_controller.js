@@ -6,11 +6,12 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
           self.brandId = parseInt( $routeParams.brandId, 10);
           $scope.brandList = sharedProperties.getBrandList();
           $scope.viewedBrand = sharedProperties.getViewedBrand();
-          $scope.facebook = sharedProperties.getBrandFacebookAccount();
 
-    $timeout(function () {
-          $scope.facebook = sharedProperties.getBrandFacebookAccount();
-    }, 100);
+     $scope.$watch(function () { return sharedProperties.getBrandFacebookAccount(); },
+                    function (value) {
+                        $scope.facebook = value;
+                    }
+                );
 
           self.fetchAllBrands = function(){
               BrandService.fetchAllBrands()
