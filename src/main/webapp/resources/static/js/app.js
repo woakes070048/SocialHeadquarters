@@ -1,5 +1,9 @@
-var app = angular.module('app', ['ngResource' , 'ngRoute', 'ui.bootstrap', 'ngDialog']);
-app.config(function($routeProvider, $locationProvider){
+var app = angular.module('app', ['ngResource' , 'ngRoute', 'ui.bootstrap', 'ngDialog','ezfb']);
+app.config(function($routeProvider, $locationProvider,ezfbProvider){
+      ezfbProvider.setInitParams({
+        appId: '1042323119170013',
+        version: 'v2.6'
+      });
     $routeProvider
         .when('/',{
             templateUrl: 'resources/static/views/home.html',
@@ -38,3 +42,9 @@ app.config(["ngDialogProvider", function (ngDialogProvider) {
         }
     });
 }]);
+/*
+app.run(function (ezfb) {
+      ezfb.init({
+        appId: '1042323119170013'
+      });
+    });*/

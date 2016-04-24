@@ -1,13 +1,18 @@
 
-app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'FacebookAccountService','sharedProperties', function($scope, $routeParams, ngDialog ,BrandService,FacebookAccountService, sharedProperties) {
+app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'ManageBrandService','sharedProperties', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties) {
           var self = this;
           self.facebookAccount = {id:null,appId:'',secretKey:'',brandId:null};
           $scope.viewedBrand = sharedProperties.getViewedBrand();
 
+         $scope.$watch(function () { return sharedProperties.getBrandFacebookAccount(); },
+                    function (value) {
+                        $scope.facebook = value;
+                    }
+                );
 
          self.createFacebookAccount = function(facebookAccount){
               facebookAccount.brandId = $scope.viewedBrand.id;
-              FacebookAccountService.createFacebookAccount(facebookAccount)
+              ManageBrandService.createFacebookAccount(facebookAccount)
                       .then(
                               function(errResponse){
                                    console.error('Error while creating FacebookAccount.');
@@ -16,7 +21,7 @@ app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' 
           };
 
          self.updateFacebookAccount = function(facebookAccount, id){
-              FacebookAccountService.updateFacebookAccount(facebookAccount, id)
+              ManageBrandService.updateFacebookAccount(facebookAccount, id)
                       .then(
                               function(errResponse){
                                    console.error('Error while updating FacebookAccount.');
@@ -24,8 +29,18 @@ app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' 
                   );
           };
 
+         self.loadProfile = function(facebookId) {
+         				 ManageBrandService.fetchFacebookAccountProfile(facebookId)
+                                              .then(function success(response) {
+         						$scope.profile = response;
+         					}, function error(error) {
+         						$scope.message = 'Couldn\'t able to fetch profile :(';
+         						console.log(error);
+         					});
+         };
+
          self.fetchFacebookAccount = function(brandId){
-               FacebookAccountService.fetchFacebookAccount(brandId)
+               ManageBrandService.fetchFacebookAccount(brandId)
                    .then(
                                 function(fetchedAccount) {
                                      sharedProperties.setBrandFacebookAccount(fetchedAccount);
@@ -51,4 +66,11 @@ app.controller('FacebookAccountController', ['$scope','$routeParams','ngDialog' 
               ngDialog.close();
           };
 
+          self.addEditFacebookAccount = function(){
+               ngDialog.open({
+                template: 'resources/static/views/modals/modalFacebook.html',
+                plain: false,
+                controller: 'ManageBrandController'
+                });
+          }
  }]);

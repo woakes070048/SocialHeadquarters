@@ -1,17 +1,11 @@
 
-app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService','FacebookAccountService','sharedProperties', '$timeout', function($scope, $routeParams, ngDialog ,BrandService,FacebookAccountService, sharedProperties, $timeout) {
+app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService','ManageBrandService','sharedProperties', '$timeout', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties, $timeout) {
           var self = this;
           self.brand={id:null,name:'',description:''};
           self.brands = [];
           self.brandId = parseInt( $routeParams.brandId, 10);
           $scope.brandList = sharedProperties.getBrandList();
           $scope.viewedBrand = sharedProperties.getViewedBrand();
-
-     $scope.$watch(function () { return sharedProperties.getBrandFacebookAccount(); },
-                    function (value) {
-                        $scope.facebook = value;
-                    }
-                );
 
           self.fetchAllBrands = function(){
               BrandService.fetchAllBrands()
@@ -81,7 +75,7 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
           };
 
           self.fetchBrandAccounts = function(brandId){
-               FacebookAccountService.fetchFacebookAccount(brandId)
+               ManageBrandService.fetchFacebookAccount(brandId)
                    .then(
                                 function(fetchedAccount) {
                                      sharedProperties.setBrandFacebookAccount(fetchedAccount);
@@ -115,11 +109,4 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
               $scope.myForm.$setPristine();
           };
 
-          self.addEditFacebookAccount = function(){
-               ngDialog.open({
-                template: 'resources/static/views/modals/modalFacebook.html',
-                plain: false,
-                controller: 'FacebookAccountController'
-                });
-}
       }]);

@@ -5,15 +5,10 @@ import kostek.socialheadquarters.models.FacebookAccount;
 import kostek.socialheadquarters.repositories.FacebookAccountRepository;
 import kostek.socialheadquarters.services.AbstractBasicAppService;
 import kostek.socialheadquarters.services.FacebookAccountService;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.index.query.HasChildQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,8 +16,6 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static org.elasticsearch.index.query.QueryBuilders.hasChildQuery;
 
 /**
  * Created by Michal Kostewicz on 25.03.16.
@@ -32,7 +25,6 @@ import static org.elasticsearch.index.query.QueryBuilders.hasChildQuery;
 public class FacebookAccountServiceImpl extends AbstractBasicAppService<FacebookAccount> implements FacebookAccountService {
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
-
     @Resource
     FacebookAccountRepository facebookAccountRepository;
 
@@ -47,7 +39,7 @@ public class FacebookAccountServiceImpl extends AbstractBasicAppService<Facebook
 
     @Override
     public FacebookAccount findById(Long id) {
-       return facebookAccountRepository.findOne(id);
+        return facebookAccountRepository.findOne(id);
     }
 
     @Override

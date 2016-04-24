@@ -10,5 +10,4 @@ public interface FacebookAccountService extends BasicAppService<FacebookAccount>
     Brand findBrandByFacebookAccountId(Long faceAccountId);
 
     boolean isEntityExist(FacebookAccount entity);
-
 }

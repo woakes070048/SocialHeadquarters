@@ -42,10 +42,11 @@
 <script src="../resources/static/js/user_controller.js"></script>
 <script src="../resources/static/js/brand_service.js"></script>
 <script src="../resources/static/js/brand_controller.js"></script>
-<script src="../resources/static/js/facebook_service.js"></script>
-<script src="../resources/static/js/facebook_controller.js"></script>
+<script src="../resources/static/js/manageBrand_service.js"></script>
+<script src="../resources/static/js/manageBrand_controller.js"></script>
 <script src="../resources/static/js/ngDialog.js"></script>
 <script src="../resources/static/js/directives.js"></script>
+<script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
 <script src="./webjars/angular-ui-bootstrap/1.1.1-1/ui-bootstrap.js"></script>
 <link rel="stylesheet" href="./webjars/bootstrap/3.3.6/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/static/css/custom.css">

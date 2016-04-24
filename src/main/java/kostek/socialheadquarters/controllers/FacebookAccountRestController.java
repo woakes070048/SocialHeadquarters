@@ -21,6 +21,7 @@ public class FacebookAccountRestController {
     @Autowired
     BrandService brandService;
 
+
     @RequestMapping(value = "/brand/facebookaccount/", method = RequestMethod.POST)
     public ResponseEntity<Void> saveFacebookAccount(@RequestBody FacebookAccount facebookAccount, UriComponentsBuilder ucBuilder) {
         if (facebookAccountService.isEntityExist(facebookAccount)) {

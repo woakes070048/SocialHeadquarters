@@ -1,5 +1,5 @@
 
-app.service('FacebookAccountService', ['$http', '$q', function($http, $q){
+app.service('ManageBrandService', ['$http', '$q', function($http, $q){
     return {
 
             fetchFacebookAccount: function(brandId){
@@ -37,6 +37,18 @@ app.service('FacebookAccountService', ['$http', '$q', function($http, $q){
                                         return $q.reject(errResponse);
                                     }
                             );
+             },
+             fetchFacebookAccountProfile: function(facebookAccount, id){
+                    return $http.put('http://localhost:8080/brand/facebookaccount/'+id+'/profile/')
+                            .then(
+                                     function(response){
+                                           return response.data;
+                                      },
+                                      function(errResponse){
+                                          console.error('Error while fetching facebookAccount profile');
+                                          return $q.reject(errResponse);
+                                       }
+                              );
              }
       };
 }]);
