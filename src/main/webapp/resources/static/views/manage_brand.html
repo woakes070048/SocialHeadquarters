@@ -21,7 +21,10 @@
         <div class="panel-heading"><h4>Facebook Account</h4>
             <button type="button" ng-click="ctrl.addEditFacebookAccount(viewedBrand.id)" class="btn btn-success custom-width">
             Add/Edit
-        </button></div>
+        </button>
+            <button class="btn btn-primary" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect with Facebook</button>
+
+        </div>
         <div class="panel-body">
             <tabs>
                 <pane title="Informations">
@@ -36,7 +39,8 @@
                 <pane title="Second Tab">
                     <div>
                         <h3>Your Facebook Profile</h3>
-
+                        <label for="faceConnectStatus"> Connection status: </label>
+                        <div id="faceConnectStatus" >{{loginStatus}}</div>
                     </div>
                 </pane>
             </tabs>

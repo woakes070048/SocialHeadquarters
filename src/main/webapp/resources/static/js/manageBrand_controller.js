@@ -1,5 +1,5 @@
 
-app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'ManageBrandService','sharedProperties', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties) {
+app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'ManageBrandService','sharedProperties','ezfb', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties,ezfb) {
           var self = this;
           self.facebookAccount = {id:null,appId:'',secretKey:'',brandId:null};
           $scope.viewedBrand = sharedProperties.getViewedBrand();
@@ -66,6 +66,28 @@ app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'B
               ngDialog.close();
           };
 
+  function updateLoginStatus (more) {
+      ezfb.getLoginStatus(function (res) {
+        $scope.loginStatus = res;
+
+        (more || angular.noop)();
+      });
+    }
+
+    function updateApiMe () {
+      ezfb.api('/me', function (res) {
+        $scope.apiMe = res;
+      });
+    }
+
+
+$scope.login = function () {
+    ezfb.login(function (res) {
+      if (res.authResponse) {
+        updateLoginStatus(updateApiMe);
+      }
+    }, {scope: 'email,user_likes'});
+  };
           self.addEditFacebookAccount = function(){
                ngDialog.open({
                 template: 'resources/static/views/modals/modalFacebook.html',
