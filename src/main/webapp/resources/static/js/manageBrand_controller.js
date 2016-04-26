@@ -66,7 +66,7 @@ app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'B
               ngDialog.close();
           };
 
-  function updateLoginStatus (more) {
+  self.updateLoginStatus = function (more) {
       ezfb.getLoginStatus(function (res) {
         $scope.loginStatus = res;
 
@@ -74,20 +74,26 @@ app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'B
       });
     }
 
-    function updateApiMe () {
+    self.updateApiMe = function () {
       ezfb.api('/me', function (res) {
         $scope.apiMe = res;
       });
     }
 
+self.updateLikes = function (){
+    ezfb.api('/' + $scope.apiMe.id + '/likes', function (res) {
+              $scope.likes = res;
+            });
+}
 
 $scope.login = function () {
     ezfb.login(function (res) {
       if (res.authResponse) {
-        updateLoginStatus(updateApiMe);
+        self.updateLoginStatus(self.updateApiMe);
       }
     }, {scope: 'email,user_likes'});
   };
+
           self.addEditFacebookAccount = function(){
                ngDialog.open({
                 template: 'resources/static/views/modals/modalFacebook.html',

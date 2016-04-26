@@ -23,6 +23,7 @@
             Add/Edit
         </button>
             <button class="btn btn-primary" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect with Facebook</button>
+            <button class="btn btn-primary" ng-click="ctrl.updateLikes()" >Update Likes</button>
 
         </div>
         <div class="panel-body">
@@ -36,12 +37,11 @@
                         <div id="faceSecret" >{{facebook.secretKey}}</div>
                     </div>
                 </pane>
-                <pane title="Second Tab">
-                    <div>
-                        <h3>Your Facebook Profile</h3>
-                        <label for="faceConnectStatus"> Connection status: </label>
-                        <div id="faceConnectStatus" >{{loginStatus}}</div>
-                    </div>
+                <pane title="Profile Informations">
+                    <div ng-include="'/resources/static/views/partials/facebook/profile.html'"> </div>
+                </pane>
+                <pane title="Likes">
+                    <div ng-include="'/resources/static/views/partials/facebook/likes.html'"> </div>
                 </pane>
             </tabs>
         </div>
