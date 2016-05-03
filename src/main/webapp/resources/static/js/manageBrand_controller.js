@@ -40,6 +40,7 @@ app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'B
          };
 
          self.fetchFacebookAccount = function(brandId){
+            if(brandId != null){
                ManageBrandService.fetchFacebookAccount(brandId)
                    .then(
                                 function(fetchedAccount) {
@@ -50,6 +51,7 @@ app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'B
                                      console.error('Error while fetching Brand Accounts');
                                  }
                         );
+            }
            };
 
           self.fetchFacebookAccount($scope.viewedBrand.id);
@@ -94,11 +96,20 @@ $scope.login = function () {
     }, {scope: 'email,user_likes'});
   };
 
-          self.addEditFacebookAccount = function(){
+          self.addEditFacebookPost = function(){
                ngDialog.open({
-                template: 'resources/static/views/modals/modalFacebook.html',
+                template: 'resources/static/views/modals/modalFacebookPost.html',
                 plain: false,
                 controller: 'ManageBrandController'
                 });
+          }
+
+          self.isFacebookConnected = function(){
+           if (!angular.isUndefined($scope.loginStatus)){
+             if($scope.loginStatus.status == 'connected'){
+              return true;
+             }
+            return false;
+           }
           }
  }]);

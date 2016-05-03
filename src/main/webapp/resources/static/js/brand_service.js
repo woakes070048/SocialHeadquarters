@@ -56,7 +56,7 @@ app.service('BrandService', ['$http', '$q', function($http, $q){
 
 }]);
 app.factory('sharedProperties', function() {
-    var viewedBrand;
+    var viewedBrand = {id:null,name:'',description:''};
     var brandList = [];
     var brandFacebookAccount;
 

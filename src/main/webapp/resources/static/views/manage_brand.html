@@ -19,22 +19,18 @@
         </div>
     <div class="panel panel-info">
         <div class="panel-heading"><h4>Facebook Account</h4>
-            <button type="button" ng-click="ctrl.addEditFacebookAccount(viewedBrand.id)" class="btn btn-success custom-width">
-            Add/Edit
-        </button>
-            <button class="btn btn-primary" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect with Facebook</button>
-            <button class="btn btn-primary" ng-click="ctrl.updateLikes()" >Update Likes</button>
+            <button class="btn btn-primary" ng-click="login()" ng-disabled="ctrl.isFacebookConnected()">Connect with Facebook</button>
 
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-click="ctrl.updateLikes()">
             <tabs>
                 <pane title="Informations">
                     <div>
                         <br/>
                         <label for="faceKey"> App ID: </label>
-                        <div id="faceKey" >{{facebook.appId}}</div>
+                        <div id="faceKey" >{{facebook.userId}}</div>
                         <label for="faceSecret"> Secret key: </label>
-                        <div id="faceSecret" >{{facebook.secretKey}}</div>
+                        <div id="faceSecret" >{{facebook.accessToken}}</div>
                     </div>
                 </pane>
                 <pane title="Profile Informations">
@@ -42,6 +38,9 @@
                 </pane>
                 <pane title="Likes">
                     <div ng-include="'/resources/static/views/partials/facebook/likes.html'"> </div>
+                </pane>
+                <pane title="Options">
+                    <div ng-include="'/resources/static/views/partials/facebook/options.html'"> </div>
                 </pane>
             </tabs>
         </div>
