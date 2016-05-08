@@ -9,7 +9,7 @@ describe('user administration panel', function() {
         return  autoGenerateUserName;
     };
 
-  beforeEach(function() {
+  beforeAll(function() {
       browser.get('http://localhost:8080/#/users');
      element.all(by.repeater('u in ctrl.users')).count().then(function(count) {
               userCountBefore = count;

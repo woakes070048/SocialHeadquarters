@@ -1,0 +1,48 @@
+{
+  "name": "michal",
+  "version": "1.0.0",
+  "description": "Social Headquarters - social portals menage tool",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k0staa/SocialHeadquarters.git"
+  },
+  "keywords": [
+    "angular",
+    "elasticsearch",
+    "spring",
+    "rest"
+  ],
+  "author": "Michal Kostewicz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k0staa/SocialHeadquarters/issues"
+  },
+  "homepage": "https://github.com/k0staa/SocialHeadquarters#readme",
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "http-server": "^0.6.1",
+    "karma": "0.13.22",
+    "karma-chrome-launcher": "1.0.1",
+    "karma-firefox-launcher": "1.0.0",
+    "karma-jasmine": "1.0.2",
+    "jasmine-core": "2.4.1",
+    "karma-junit-reporter": "1.0.0",
+    "protractor": "2"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server src/main/webapp/static/js -a localhost -p 8000",
+    "pretest": "npm install",
+    "test": "karma start test/karmaConf.js",
+    "test-single-run": "karma start test/karmaConf.js  --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor test/protractorConf.js"
+  }
+}

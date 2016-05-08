@@ -33,9 +33,9 @@
         </nav>
 
 <div class="container" ng-view></div>
-<script src="./webjars/angularjs/1.5.0/angular.js"></script>
-<script src="./webjars/angularjs/1.5.0/angular-resource.js"></script>
-<script src="./webjars/angularjs/1.5.0/angular-route.js"></script>
+<script src="../resources/static/js/vendor/angular/angular.js"></script>
+<script src="../resources/static/js/vendor/angular-resource/angular-resource.js"></script>
+<script src="../resources/static/js/vendor/angular-route/angular-route.js"></script>
 <script src="../resources/static/js/app.js"></script>
 <script src="../resources/static/js/controller.js"></script>
 <script src="../resources/static/js/user_service.js"></script>
@@ -46,9 +46,9 @@
 <script src="../resources/static/js/manageBrand_controller.js"></script>
 <script src="../resources/static/js/ngDialog.js"></script>
 <script src="../resources/static/js/directives.js"></script>
-<script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
-<script src="./webjars/angular-ui-bootstrap/1.1.1-1/ui-bootstrap.js"></script>
-<link rel="stylesheet" href="./webjars/bootstrap/3.3.6/css/bootstrap.css">
+<script src="../resources/static/js/vendor/angular-easyfb/build/angular-easyfb.min.js"></script>
+<script src="../resources/static/js/vendor/angular-bootstrap/ui-bootstrap.js"></script>
+<link rel="stylesheet" href="../resources/static/js/vendor/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/static/css/custom.css">
 <link rel="stylesheet" href="../resources/static/css/ngDialog.css">
 

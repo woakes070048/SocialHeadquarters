@@ -1,0 +1,34 @@
+{
+  "name": "michal",
+  "description": "Social Headquarters - social portals menage tool",
+  "main": "app.js",
+  "authors": [
+    "Michal Kostewicz"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "elasticsearch",
+    "spring",
+    "rest"
+  ],
+  "homepage": "https://github.com/k0staa/SocialHeadquarters",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-loader": "~1.5.0",
+    "angular-resource": "~1.5.0",
+    "angular-easyfb": "",
+    "angular-bootstrap": "",
+    "angular-mocks": "~1.5.0",
+    "bootstrap":""
+  }
+}

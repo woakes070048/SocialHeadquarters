@@ -31,3 +31,8 @@
 # ## File-based project format:
 *.ipr
 *.iws
+tags
+**/vendor/*
+**/node_modules/*
+.bowerrc
+npm-debug.log

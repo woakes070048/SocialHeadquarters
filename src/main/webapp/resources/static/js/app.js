@@ -42,9 +42,4 @@ app.config(["ngDialogProvider", function (ngDialogProvider) {
         }
     });
 }]);
-/*
-app.run(function (ezfb) {
-      ezfb.init({
-        appId: '1042323119170013'
-      });
-    });*/
+
