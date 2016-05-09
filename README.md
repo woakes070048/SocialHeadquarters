@@ -1,15 +1,13 @@
-Social Headquarters
---------------------
+## Social Headquarters
+
 Aim of the project is allow people (or companies) to manage their accounts on social portals like
 Twitter, Facebook, Linkedin, and to gather all kind of information's from these social portals and
 place them in Elasticsearch (non relational) database engine. In future functionalities gathered
 data would be automatically searched and used to trigger some events.
 
--------Dependencies-------
-You need to have Elasticsearch database available on your system (up and running). Application is
-using 9200 binary port to communicate with Elasticsearch.
 
--------Functionalities availible now:--------
+## Functionalities availible now:
+
 - Adding users to database (administration);
 - Adding brands to database;
 - Enter 'Manage Brand' page;
@@ -17,19 +15,30 @@ using 9200 binary port to communicate with Elasticsearch.
 - Basic integration tests on server side;
 - Basic e2e and unit tests on frontend side;
 
---------Testing----------
+
+## Dependencies
+
+You need to have Elasticsearch database available on your system (up and running). Application is
+using 9200 binary port to communicate with Elasticsearch.
+
+
+## Running
+
+You can create project 'war' file using 'mvn install' and run it on servlet container or enterprise
+server. For development purpose you can use Jetty plugin using 'mvn jetty:run' command.
+
+
+## Testing
+
 You can test backend by using maven. Just run 'mvn test'. Project test uses Elasticsearch
 database engine running within the test configuration (embedded).
 
 To test AngularJS you need to change directory to '/src/webapp/resources/static/js'
 and run 'npm protractor' for e2e tests (Protractor) or 'npm test' for unit tests(Karma).
 
---------Running----------
-You can create project 'war' file using 'mvn install' and run it on servlet container or enterprise
-server. For development purpose you can use Jetty plugin using 'mvn jetty:run' command.
 
+## Licence
 
---------Copyrights-------
 Project uses a MIT licence .
 
 MIT License
