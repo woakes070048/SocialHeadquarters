@@ -98,7 +98,7 @@ $scope.login = function () {
 
           self.addEditFacebookPost = function(){
                ngDialog.open({
-                template: 'resources/static/views/modals/modalFacebookPost.html',
+                template: 'resources/static/app/views/modals/modalFacebookPost.html',
                 plain: false,
                 controller: 'ManageBrandController'
                 });

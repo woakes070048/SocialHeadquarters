@@ -33,24 +33,25 @@
         </nav>
 
 <div class="container" ng-view></div>
-<script src="../resources/static/js/vendor/angular/angular.js"></script>
-<script src="../resources/static/js/vendor/angular-resource/angular-resource.js"></script>
-<script src="../resources/static/js/vendor/angular-route/angular-route.js"></script>
-<script src="../resources/static/js/app.js"></script>
-<script src="../resources/static/js/controller.js"></script>
-<script src="../resources/static/js/user_service.js"></script>
-<script src="../resources/static/js/user_controller.js"></script>
-<script src="../resources/static/js/brand_service.js"></script>
-<script src="../resources/static/js/brand_controller.js"></script>
-<script src="../resources/static/js/manageBrand_service.js"></script>
-<script src="../resources/static/js/manageBrand_controller.js"></script>
-<script src="../resources/static/js/ngDialog.js"></script>
-<script src="../resources/static/js/directives.js"></script>
-<script src="../resources/static/js/vendor/angular-easyfb/build/angular-easyfb.min.js"></script>
-<script src="../resources/static/js/vendor/angular-bootstrap/ui-bootstrap.js"></script>
-<link rel="stylesheet" href="../resources/static/js/vendor/bootstrap/dist/css/bootstrap.css">
-<link rel="stylesheet" href="../resources/static/css/custom.css">
-<link rel="stylesheet" href="../resources/static/css/ngDialog.css">
+<script src="../resources/static/app/node_modules/angular/angular.js"></script>
+<script src="../resources/static/app/node_modules/angular-resource/angular-resource.js"></script>
+<script src="../resources/static/app/node_modules/angular-route/angular-route.js"></script>
+<script src="../resources/static/app/app.js"></script>
+<script src="../resources/static/app/controllers/mainController.js"></script>
+<script src="../resources/static/app/controllers/contactController.js"></script>
+<script src="../resources/static/app/services/userService.js"></script>
+<script src="../resources/static/app/controllers/userController.js"></script>
+<script src="../resources/static/app/services/brandService.js"></script>
+<script src="../resources/static/app/controllers/brandController.js"></script>
+<script src="../resources/static/app/services/manageBrandService.js"></script>
+<script src="../resources/static/app/controllers/manageBrandController.js"></script>
+<script src="../resources/static/app/ngDialog.js"></script>
+<script src="../resources/static/app/directives/tabsDirective.js"></script>
+<script src="../resources/static/app/node_modules/angular-easyfb/build/angular-easyfb.min.js"></script>
+<script src="../resources/static/app/node_modules/angular-bootstrap/ui-bootstrap.js"></script>
+<link rel="stylesheet" href="../resources/static/app/node_modules/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="../resources/static/assets/css/custom.css">
+<link rel="stylesheet" href="../resources/static/assets/css/ngDialog.css">
 
 </body>
 </html>

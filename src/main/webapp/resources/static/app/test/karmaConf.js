@@ -29,7 +29,8 @@ module.exports = function(config) {
    reporters: ['junit'],
 
    junitReporter: {
-                 outputFile: 'test/report_unit.xml'
+                 outputFile: 'report_unit.xml',
+                 outputDir: 'test/reports'
                   }
   });
 };

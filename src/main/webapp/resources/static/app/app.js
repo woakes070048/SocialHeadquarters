@@ -6,23 +6,23 @@ app.config(function($routeProvider, $locationProvider,ezfbProvider){
       });
     $routeProvider
         .when('/',{
-            templateUrl: 'resources/static/views/home.html',
+            templateUrl: 'resources/static/app/views/home.html',
             controller: 'MainController'
         })
         .when('/users',{
-            templateUrl: 'resources/static/views/admin_users.html',
+            templateUrl: 'resources/static/app/views/admin_users.html',
             controller: 'UserController'
         })
          .when('/brands',{
-                    templateUrl: 'resources/static/views/user_brands.html',
+                    templateUrl: 'resources/static/app/views/user_brands.html',
                     controller: 'BrandController'
                 })
         .when('/brand', {
-                       templateUrl: 'resources/static/views/manage_brand.html',
+                       templateUrl: 'resources/static/app/views/manage_brand.html',
                        controller: 'BrandController'
                 })
         .when('/contactus',{
-            templateUrl: 'resources/static/views/contactus.html',
+            templateUrl: 'resources/static/app/views/contactus.html',
             controller: 'ContactController'
         })
         .otherwise(

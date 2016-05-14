@@ -1,4 +1,4 @@
-## Social Headquarters
+# Social Headquarters
 
 Aim of the project is allow people (or companies) to manage their accounts on social portals like
 Twitter, Facebook, Linkedin, and to gather all kind of information's from these social portals and
