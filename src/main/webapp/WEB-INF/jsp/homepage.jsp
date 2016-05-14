@@ -33,22 +33,7 @@
         </nav>
 
 <div class="container" ng-view></div>
-<script src="../resources/static/app/node_modules/angular/angular.js"></script>
-<script src="../resources/static/app/node_modules/angular-resource/angular-resource.js"></script>
-<script src="../resources/static/app/node_modules/angular-route/angular-route.js"></script>
-<script src="../resources/static/app/app.js"></script>
-<script src="../resources/static/app/controllers/mainController.js"></script>
-<script src="../resources/static/app/controllers/contactController.js"></script>
-<script src="../resources/static/app/services/userService.js"></script>
-<script src="../resources/static/app/controllers/userController.js"></script>
-<script src="../resources/static/app/services/brandService.js"></script>
-<script src="../resources/static/app/controllers/brandController.js"></script>
-<script src="../resources/static/app/services/manageBrandService.js"></script>
-<script src="../resources/static/app/controllers/manageBrandController.js"></script>
-<script src="../resources/static/app/ngDialog.js"></script>
-<script src="../resources/static/app/directives/tabsDirective.js"></script>
-<script src="../resources/static/app/node_modules/angular-easyfb/build/angular-easyfb.min.js"></script>
-<script src="../resources/static/app/node_modules/angular-bootstrap/ui-bootstrap.js"></script>
+<script data-main="../resources/static/app/main.js" src="../resources/static/app/node_modules/requirejs/require.js"></script>
 <link rel="stylesheet" href="../resources/static/app/node_modules/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/static/assets/css/custom.css">
 <link rel="stylesheet" href="../resources/static/assets/css/ngDialog.css">
