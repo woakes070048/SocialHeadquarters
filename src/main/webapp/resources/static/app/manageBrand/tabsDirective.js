@@ -1,4 +1,7 @@
-app.directive('tabs', function() {
+define(['./module'], function (module) {
+    'use strict';
+
+    module.directive('tabs', function() {
         return {
           restrict: 'E',
           transclude: true,
@@ -45,3 +48,4 @@ app.directive('tabs', function() {
           replace: true
         };
       })
+});

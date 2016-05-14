@@ -1,5 +1,7 @@
+define(['./module'], function (module) {
+    'use strict';
 
-app.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'ManageBrandService','sharedProperties','ezfb', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties,ezfb) {
+    module.controller('ManageBrandController', ['$scope','$routeParams','ngDialog' , 'BrandService' ,'ManageBrandService','sharedProperties','ezfb', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties,ezfb) {
           var self = this;
           self.facebookAccount = {id:null,appId:'',secretKey:'',brandId:null};
           $scope.viewedBrand = sharedProperties.getViewedBrand();
@@ -98,7 +100,7 @@ $scope.login = function () {
 
           self.addEditFacebookPost = function(){
                ngDialog.open({
-                template: 'resources/static/app/views/modals/modalFacebookPost.html',
+                template: 'resources/static/app/manageBrand/modals/modalFacebookPost.html',
                 plain: false,
                 controller: 'ManageBrandController'
                 });
@@ -113,3 +115,4 @@ $scope.login = function () {
            }
           }
  }]);
+});

@@ -1,5 +1,7 @@
+define(['./module'], function (module) {
+    'use strict';
 
-app.controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
+    module.controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
           var self = this;
           self.user={id:null,name:'',address:'',email:''};
           self.users=[];
@@ -84,3 +86,4 @@ app.controller('UserController', ['$scope', 'UserService', function($scope, User
           };
 
       }]);
+});

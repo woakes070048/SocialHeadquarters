@@ -1,5 +1,7 @@
+define(['./module'], function (module) {
+    'use strict';
 
-app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService','ManageBrandService','sharedProperties', '$timeout', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties, $timeout) {
+    module.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandService','ManageBrandService','sharedProperties', '$timeout', function($scope, $routeParams, ngDialog ,BrandService,ManageBrandService, sharedProperties, $timeout) {
           var self = this;
           self.brand={id:null,name:'',description:''};
           self.brands = [];
@@ -110,3 +112,4 @@ app.controller('BrandController', ['$scope','$routeParams','ngDialog' , 'BrandSe
           };
 
       }]);
+});

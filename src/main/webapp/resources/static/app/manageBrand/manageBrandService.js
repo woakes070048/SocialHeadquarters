@@ -1,5 +1,7 @@
+define(['./module'], function (module) {
+    'use strict';
 
-app.service('ManageBrandService', ['$http', '$q', function($http, $q){
+    module.service('ManageBrandService', ['$http', '$q', function($http, $q){
     return {
 
             fetchFacebookAccount: function(brandId){
@@ -52,3 +54,4 @@ app.service('ManageBrandService', ['$http', '$q', function($http, $q){
              }
       };
 }]);
+});

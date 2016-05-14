@@ -1,6 +1,7 @@
-'use strict';
+define(['./module'], function (module) {
+    'use strict';
 
-app.factory('UserService', ['$http', '$q', function($http, $q){
+    module.factory('UserService', ['$http', '$q', function($http, $q){
     return {
             fetchAllUsers: function() {
                     return $http.get('http://localhost:8080/user/')
@@ -57,3 +58,4 @@ app.factory('UserService', ['$http', '$q', function($http, $q){
     };
 
 }]);
+});
