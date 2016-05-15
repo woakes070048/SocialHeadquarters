@@ -12,15 +12,14 @@ require.config({
         'domReady': 'node_modules/requirejs-domready/domReady'
     },
 
-    // Add angular modules that does not support AMD out of the box, put it in a shim
     shim: {
-     'angular': {
+         'angular': {
                 exports: 'angular'
-            },
-        'angular-route': ['angular'],
+                   },
+        'angular-route':    ['angular'],
         'angular-resource': ['angular'],
-        'angular-easyfb': ['angular'],
-        'angular-bootstrap': ['angular'],
+        'angular-easyfb':   ['angular'],
+        'angular-bootstrap':['angular'],
     },
 
     // kick start application

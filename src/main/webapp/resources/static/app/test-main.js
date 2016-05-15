@@ -4,12 +4,12 @@ require.config({
      paths: {
           'angular': 'node_modules/angular/angular.min',
           'angular-mocks': 'node_modules/angular-mocks/angular-mocks',
-                  'angular-route': 'node_modules/angular-route/angular-route.min',
-                  'angular-resource': 'node_modules/angular-resource/angular-resource.min',
-                  'angular-easyfb': 'node_modules/angular-easyfb/build/angular-easyfb.min',
-                  'angular-bootstrap': 'node_modules/angular-bootstrap/ui-bootstrap',
-                  'ngDialog': 'ngDialog',
-                  'domReady': 'node_modules/requirejs-domready/domReady'
+          'angular-route': 'node_modules/angular-route/angular-route.min',
+          'angular-resource': 'node_modules/angular-resource/angular-resource.min',
+          'angular-easyfb': 'node_modules/angular-easyfb/build/angular-easyfb.min',
+          'angular-bootstrap': 'node_modules/angular-bootstrap/ui-bootstrap',
+          'ngDialog': 'ngDialog',
+          'domReady': 'node_modules/requirejs-domready/domReady'
      },
      shim: {
          'angular': {'exports': 'angular'},
@@ -18,14 +18,13 @@ require.config({
              'exports': 'angular-mocks'
          },
          'angular-route': ['angular'],
-                 'angular-resource': ['angular'],
-                 'angular-easyfb': ['angular'],
-                 'angular-bootstrap': ['angular'],
+         'angular-resource': ['angular'],
+         'angular-easyfb': ['angular'],
+         'angular-bootstrap': ['angular'],
      },
      priority: [
          "angular"
      ]
-  // we have to kickoff jasmine, as it is asynchronous
 });
   require(['angular-mocks'], function() {
 
@@ -44,13 +43,13 @@ require.config({
       callback: window.__karma__.start
     });
   });
-  require([      'angular',
-                  'app',
-                'require',
-                'angular-mocks',
-                              'routeConfig',
-                              'easyfbConfig',
-                              'ngDialogConfig'
+  require([    'angular',
+               'app',
+               'require',
+               'angular-mocks',
+               'routeConfig',
+               'easyfbConfig',
+               'ngDialogConfig'
       ], function (angular, app) {
           require(['domReady!'], function (document) {
               angular.bootstrap(document, ['app']);

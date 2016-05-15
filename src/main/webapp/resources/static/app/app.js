@@ -25,6 +25,5 @@ define([ 'angular',
             'app.users'
             ]);
 
-            return app;
-
+    return app;
 });
