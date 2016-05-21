@@ -8,6 +8,8 @@ define(['./module'], function (module) {
           self.brandId = parseInt( $routeParams.brandId, 10);
           $scope.brandList = sharedProperties.getBrandList();
           $scope.viewedBrand = sharedProperties.getViewedBrand();
+          $scope.pageClass = 'page-brands';
+
 
           self.fetchAllBrands = function(){
               BrandService.fetchAllBrands()

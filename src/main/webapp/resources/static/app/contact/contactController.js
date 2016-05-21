@@ -3,5 +3,7 @@ define(['./module'], function (module) {
 
     module.controller('ContactController',  ['$scope',function($scope) {
     $scope.headingTitle = "Contact Info";
+    $scope.pageClass = 'page-contact';
+
 }]);
 });

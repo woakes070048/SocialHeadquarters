@@ -5,6 +5,7 @@ define(['./module'], function (module) {
           var self = this;
           self.user={id:null,name:'',address:'',email:''};
           self.users=[];
+          $scope.pageClass = 'page-users';
 
           self.fetchAllUsers = function(){
               UserService.fetchAllUsers()

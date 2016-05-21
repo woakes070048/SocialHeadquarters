@@ -32,10 +32,11 @@
     </div>
         </nav>
 
-<div class="container" ng-view></div>
+<div class="container page {{ pageClass }}" ng-view></div>
 <script data-main="../resources/static/app/main.js" src="../resources/static/app/node_modules/requirejs/require.js"></script>
 <link rel="stylesheet" href="../resources/static/app/node_modules/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="../resources/static/assets/css/custom.css">
+<link rel="stylesheet" href="../resources/static/assets/css/animation.css">
 <link rel="stylesheet" href="../resources/static/assets/css/ngDialog.css">
 
 </body>
