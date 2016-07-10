@@ -8,6 +8,7 @@ require.config({
           'angular-resource': 'node_modules/angular-resource/angular-resource.min',
           'angular-easyfb': 'node_modules/angular-easyfb/build/angular-easyfb.min',
           'angular-bootstrap': 'node_modules/angular-bootstrap/ui-bootstrap',
+          'angular-animate': 'node_modules/angular-animate/angular-animate.min',
           'ngDialog': 'ngDialog',
           'domReady': 'node_modules/requirejs-domready/domReady'
      },
@@ -21,6 +22,7 @@ require.config({
          'angular-resource': ['angular'],
          'angular-easyfb': ['angular'],
          'angular-bootstrap': ['angular'],
+         'angular-animate':  ['angular']
      },
      priority: [
          "angular"

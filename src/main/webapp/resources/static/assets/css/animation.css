@@ -55,17 +55,14 @@ nav li a { color: #091215; }
 
 /* home -------------------------- */
 .page-home.ng-leave         {
-    -webkit-transform-origin: 0% 0%;
-	-webkit-animation: rotateFall 1s both ease-in;
-	-moz-transform-origin: 0% 0%;
-	-moz-animation: rotateFall 1s both ease-in;
-	transform-origin: 0% 0%;
-	animation: rotateFall 1s both ease-in;
+    -webkit-animation:slideOutLeft 0.5s both ease-in;
+	-moz-animation:slideOutLeft 0.5s both ease-in;
+	animation:slideOutLeft 0.5s both ease-in;
 }
 .page-home.ng-enter 		{  
-    -webkit-animation:scaleUp 0.5s both ease-in;
-	-moz-animation:scaleUp 0.5s both ease-in;
-	animation:scaleUp 0.5s both ease-in;    
+    -webkit-animation:slideInRight 0.5s both ease-in;
+	-moz-animation:slideInRight 0.5s both ease-in;
+	animation:slideInRight 0.5s both ease-in;
 }
 
 /* brands */
@@ -82,32 +79,26 @@ nav li a { color: #091215; }
 
 /* contact */
 .page-contact.ng-leave      {
-    -webkit-transform-origin: 50% 50%;
-	-webkit-animation: rotateOutNewspaper .5s both ease-in;
-	-moz-transform-origin: 50% 50%;
-	-moz-animation: rotateOutNewspaper .5s both ease-in;
-	transform-origin: 50% 50%;
-	animation: rotateOutNewspaper .5s both ease-in;
+    -webkit-animation:slideOutLeft 0.5s both ease-in;
+	-moz-animation:slideOutLeft 0.5s both ease-in;
+	animation:slideOutLeft 0.5s both ease-in;
 }
 .page-contact.ng-enter 		{ 
-    -webkit-animation:slideInUp 0.5s both ease-in;
-	-moz-animation:slideInUp 0.5s both ease-in;
-	animation:slideInUp 0.5s both ease-in;  
+    -webkit-animation:slideInRight 0.5s both ease-in;
+	-moz-animation:slideInRight 0.5s both ease-in;
+	animation:slideInRight 0.5s both ease-in;
 }
 
 /* users */
 .page-users.ng-leave      {
-    -webkit-transform-origin: 50% 50%;
-	-webkit-animation: rotateOutNewspaper .5s both ease-in;
-	-moz-transform-origin: 50% 50%;
-	-moz-animation: rotateOutNewspaper .5s both ease-in;
-	transform-origin: 50% 50%;
-	animation: rotateOutNewspaper .5s both ease-in;
+    -webkit-animation:slideOutLeft 0.5s both ease-in;
+	-moz-animation:slideOutLeft 0.5s both ease-in;
+	animation:slideOutLeft 0.5s both ease-in;
 }
 .page-users.ng-enter 		{
-    -webkit-animation:slideInUp 0.5s both ease-in;
-	-moz-animation:slideInUp 0.5s both ease-in;
-	animation:slideInUp 0.5s both ease-in;
+    -webkit-animation:slideInRight 0.5s both ease-in;
+	-moz-animation:slideInRight 0.5s both ease-in;
+	animation:slideInRight 0.5s both ease-in;
 }
 
 /* rotate and fall */

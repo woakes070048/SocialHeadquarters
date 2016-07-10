@@ -33,7 +33,7 @@ server. For development purpose you can use Jetty plugin using 'mvn jetty:run' c
 You can test backend by using maven. Just run 'mvn test'. Project test uses Elasticsearch
 database engine running within the test configuration (embedded).
 
-To test AngularJS you need to change directory to '/src/webapp/resources/static/js'
+To test AngularJS you need to change directory to '/src/main/webapp/resources/static/app'
 and run 'npm protractor' for e2e tests (Protractor) or 'npm test' for unit tests(Karma).
 
 

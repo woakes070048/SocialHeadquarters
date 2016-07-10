@@ -14,6 +14,7 @@ module.exports = function(config) {
             {pattern: 'node_modules/angular-resource/angular-resource.min.js',included: false},
             {pattern: 'node_modules/angular-easyfb/build/angular-easyfb.min.js',included: false},
             {pattern: 'node_modules/angular-bootstrap/ui-bootstrap.js',included: false},
+            {pattern: 'node_modules/angular-animate/angular-animate.min',included: false},
             {pattern: 'node_modules/requirejs-domready/domReady.js', included: false},
             {pattern: 'test/unit/*.js', included: true },
             {pattern: './**/*.js', included: false },
