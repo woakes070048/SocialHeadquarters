@@ -26,7 +26,7 @@
         <ul class="nav navbar-nav">
         <li><a href="#/users">Users Administration</a></li>
         <li><a href="#/brands">Brands</a></li>
-        <li><a href="#/contactus">Contact</a></li>
+        <li><a href="#/about">About Social Headquarters</a></li>
     </ul>
     </div>
     </div>

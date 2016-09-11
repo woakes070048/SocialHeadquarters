@@ -1,1 +1,0 @@
-define(['./contactController'], function () {});

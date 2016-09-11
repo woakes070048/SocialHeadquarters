@@ -18,3 +18,9 @@ body { padding-top: 70px; }
         .email.ng-dirty.ng-invalid-email {
         background-color: yellow;
         }
+.form-control {
+    background-color: #29293c;
+}
+.panel {
+    background-color: #29293c;
+}

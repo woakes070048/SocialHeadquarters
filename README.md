@@ -2,7 +2,7 @@
 
 Aim of the project is allow people (or companies) to manage their accounts on social portals like
 Twitter, Facebook, Linkedin, and to gather all kind of information's from these social portals and
-place them in Elasticsearch (non relational) database engine. In future functionalities gathered
+place them in Elasticsearch (non relational) database engine. In future functionalist's gathered
 data would be automatically searched and used to trigger some events.
 
 
@@ -19,13 +19,18 @@ data would be automatically searched and used to trigger some events.
 ## Dependencies
 
 You need to have Elasticsearch database available on your system (up and running). Application is
-using 9200 binary port to communicate with Elasticsearch.
+using 9300 binary port to communicate with Elasticsearch. You can configure Elasticsearch host IP in
+'src\main\resources\transport_node.properties' file. When you have Elasticsearch started you can initialize INDEX
+, it will be automatically performed on first start of application server.
+Please install all dependencies for server side using 'mvn install' command and for client side use command
+'npm install' (you need to be in 'src\main\webapp\resources\static\app' folder)
+
 
 
 ## Running
 
 You can create project 'war' file using 'mvn install' and run it on servlet container or enterprise
-server. For development purpose you can use Jetty plugin using 'mvn jetty:run' command.
+server. For development purpose you can use Tomcat plugin using 'mvn tomcat:run' command.
 
 
 ## Testing

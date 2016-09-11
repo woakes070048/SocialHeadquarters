@@ -19,9 +19,9 @@ define('routeConfig', ['./app'], function (app) {
                                     templateUrl: 'resources/static/app/manageBrand/manage_brand.html',
                                     controller: 'BrandController'
                              })
-                            .when('/contactus',{
-                                    templateUrl: 'resources/static/app/contact/contactus.html',
-                                    controller: 'ContactController'
+                            .when('/about',{
+                                    templateUrl: 'resources/static/app/about/about.html',
+                                    controller: 'AboutController'
                              })
                             .otherwise({
                                     redirectTo: '/'
